@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "Michael Cuffaro, IT Guy, Launches Site"
+description: first post
+tags: jekyll blog github-page
 date: 2017-11-26
 ---
 
