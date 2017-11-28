@@ -25,5 +25,8 @@
 	        		<li><a href="https://github.com/sk1u">github.com/sk1u</a></li>
 				</ul>
 			</footer>
+            {% if jekyll.environment == 'production' %}
+            {% include analytics.html %}
+            {% endif %}
 		</body>
 	</html>
