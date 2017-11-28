@@ -2,5 +2,3 @@ name: Michael Cuffaro, IT Guy
 markdown: kramdown
 
 permalink: /blog/:year/:month/:day/:title
-
-theme: jekyll-theme-hacker
