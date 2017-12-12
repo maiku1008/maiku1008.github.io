@@ -1,4 +1,7 @@
-name: Michael Cuffaro, IT Guy
+name: Michael Cuffaro's Blog
+description: Musings, Documenting, Learning, Python, Geek stuff.
+url: https://sk1u.com
+
 markdown: kramdown
 
 permalink: /blog/:year/:month/:day/:title
