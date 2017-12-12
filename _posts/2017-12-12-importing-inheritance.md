@@ -60,7 +60,7 @@ bulk_event_adder.py: error: unrecognized arguments: list.csv
 Wat.  
 I've used similar code before and it always worked, like clockwork.
 
-The program was _NOT_ behaving the way I intended, plus it was throwing in an error which i would expect from argparse.
+The program was _NOT_ behaving the way I intended, plus it was throwing an error which I wouldn't expect from the `sys` module. 
 
 ![alt text](https://i.imgur.com/GoI5PWr.jpg)  
 
@@ -101,7 +101,7 @@ def import_module(modname):
     return module
 ```
 
-*In short: If the name has been imported elsewhere, it will be in the global list of all modules, and so will be reused.*
+**In short: If the name has been imported elsewhere, it will be in the global list of all modules, and so will be reused.**
 
 Workarounds to this?
 Initialising `argparse` in the imported module, under
