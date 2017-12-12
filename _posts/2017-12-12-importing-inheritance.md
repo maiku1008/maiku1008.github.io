@@ -19,8 +19,12 @@ Anyway, the program is divided into two parts, the first being the *google\_cale
 
 The second part, is the *bulk\_event\_adder*, the main portion of the program, which takes the CSV file as its input and has the program logic built in it, importing the *add\_reminder()* func from *google\_calendar\_toolkit*.
 
+![Imgur](https://i.imgur.com/2S4xrsW.png)
+
 My goal was to be able to run something like the following:  
-`python bulk_event_adder.py list.csv`  
+```
+python bulk_event_adder.py list.csv  
+```
 
 And have it work its magic that way.  
 I would have done that in the simplest way possible, by starting with:  
@@ -40,7 +44,9 @@ with open(sys.argv[1], 'rb') as csvfile:
 `sys.argv[1]` being the desired filename.  
 
 Of course trying to run this via:  
-`python bulk_event_adder.py list.csv`  
+```
+python bulk_event_adder.py list.csv
+```
 
 yielded a weird error:
 ```
@@ -54,8 +60,10 @@ bulk_event_adder.py: error: unrecognized arguments: list.csv
 Wat.  
 I've used similar code before and it always worked, like clockwork.
 
-
 The program was _NOT_ behaving the way I intended, plus it was throwing in an error which i would expect from argparse.
+
+![alt text](https://i.imgur.com/GoI5PWr.jpg)  
+
 Some time after scouring [Stack Overflow](https://stackoverflow.com/), it hit me: my code was fine. A code snippet used in *google\_calendar\_toolkit* was the culprit:  
 
 ```
@@ -71,10 +79,14 @@ This is defined nearly at the beginning of the file, and used as part of the oau
 My main *bulk\_event\_adder* was infact inheriting that import, and behaving as if i had imported and initialized argparse.
 
 This is because when we write:  
-`import some_module`
+```
+import some_module
+```
 
 We really are writing something like:  
-`some_module = import_module("some_module")`  
+```
+some_module = import_module("some_module")
+```  
 
 Where `import_module` is kind of like:  
 ```
@@ -89,7 +101,7 @@ def import_module(modname):
     return module
 ```
 
-_In short: If the name has been imported elsewhere, it will be in the global list of all modules, and so will be reused._
+*In short: If the name has been imported elsewhere, it will be in the global list of all modules, and so will be reused.*
 
 Workarounds to this?
 Initialising `argparse` in the imported module, under
@@ -102,5 +114,7 @@ This way, Argparse is initialised only if the imported module is run as main.
 
 Of course it is to be seen if argparse needs to be initialised outside of that, depending on the context.
 In the case of my *domain-google-calendar*, I simply chose to call the csv by its filename in the script, so that it can be run as follows:  
-`python bulk_event_adder.py`
+```
+python bulk_event_adder.py
+```
 
