@@ -2,24 +2,33 @@
 layout: post
 title: "The Linux Filesystem"
 description: Linux Filesystem
-tags: linux filesystem
-date: 2017-01-14
+tags: linux filesystem notes
+date: 2018-01-16
 ---
 
-Like all UNIX-based operating systems, Linux consists of a single big filesystem tree. It's designed as an inverted tree with the root directory **/** at the top of the tree.  
+This post is really not a post, it's mainly a dump of notes I have been putting together while following one of my online courses related to Linux & OpenSource.  
+It has memes so it's a little less boring, but I do understand if one spaces out even then.  
+With that out of the way, let's begin!  
 
+![Old fart who likes writing fantasy books about winter and people dying](https://i.imgur.com/L6uT1Mn.jpg)
+
+Like all UNIX-based operating systems, Linux consists of a single big filesystem tree. It's designed as an inverted tree with the root directory **/** at the top of the tree.  
 Different filesystems, locally present in different partitions, or sometimes on the network, can be **mounted** at various points within this large logical filesystem.  
 
 Regardless of how things are actually joined together, it all just looks like one filesystem, with applications not caring at all about what physical device files actually reside on.  
 
 The following is a list of the main directories normally found under **/**:
 
+![du](https://i.imgur.com/u8vsKGC.png)
+
 ### /
 This is the primary directory of the entire file system hierarchy.
-The partition and filesystem containing the root directory itself is often in a special dedicated partition. The root partition must contain all essential files required to boot the system, and mount all the other file systems.
+The partition and filesystem containing the root directory itself is often in a special dedicated partition. 
+The root partition must contain all essential files required to boot the system, and mount all the other file systems.
 
 ### /bin
-Contains essential executable programs and scripts that must be available in single user mode. These programs are required when no other filesystems have yet been mounted. This directory may not include any subdirectories.
+Contains essential executable programs and scripts that must be available in single user mode. 
+These programs are required when no other filesystems have yet been mounted. This directory may not include any subdirectories.
 
 Required programs which must exists in this directory are:  
 **cat, chgrp, chmod, chown, cp, date, dd, df, dmesg, echo, false, hostname, kill, ln, login, ls, mkdir, mknod, more, mount, mv, ps, pwd, rm, rmdir, sed, sh, stty, su, sync, true, umount and uname.**   
@@ -40,10 +49,9 @@ File and directories which may be found here include:
 
 Other important subdirectories includ **/etc/skel**, and **/etc/init**.
 
-
 ### /home
 User **home** directories, including personal settings, files, etc.  
-All personal configurations, data, executable programs would be placed under this directory, for example under **/home/user1**.
+All personal configurations, data, executable programs would be placed under this directory, for example under **/home/sk1u**.
 
 Users can always substitute the environmental variable $HOME for their root directory, or the shorthand **~**:
 
@@ -55,12 +63,12 @@ is the same as:
 
 ### /lib
 Libraries required by executable binaries in /bin and /sbin.
-These libraries are particularly important for booting the system and executin commands within the root filesystem.
+These libraries are particularly important for booting the system and executing commands within the root filesystem.
 
 Kernel modules (like device or filesystem drivers) are located under **/lib/modules/\<kernel-version-number\>**
 
 **PAM** (Pluggable Authentication Modules) files are stored in **/lib/security**.  
-A **/lib64** directory may be found in cases oh Red-Hat systems that support 64-bit binaries.
+A **/lib64** directory may be found in cases of Red-Hat systems that support 64-bit binaries.
 
 ### /media
 Mount points for removable media such as CDs, DVDs, USB Sticks and floppy disks.  
@@ -97,7 +105,6 @@ Examples of binaries included in this directories are the following:
 Site-specific data which is served by the system.
 The main purpose of specifying this is so users can find location of the data files for a particular service. There is no general consensus at the moment as to how this directory should be structured. One method be to structure data by protocol, example **ftp, rsync, www and cvs**.
 
-
 ### /tmp
 Temporary files which can be accessed by any user or application.  
 Data in this directory is not meant to be depended on to stay around for a long time.
@@ -120,6 +127,10 @@ This directory has been in use for several years by major Linux distributions, b
 ### Others
 The [Filesystem Hierarchy Standard](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html), previously created by Free Standards and now passed onto the Linux Foundation, standardizes the filesystem structure as the above across all distributions.   
 We may however find additional distribution-specific dirs found under the root directory.  
-These may include things like  **/misc** or **tftpboot**,
+These may include things like  **/misc** or **/tftpboot**,
+
+Finally, I leave you with scumbag linux guy to wrap up this mess:
+
+![Linux Douchebag](https://i.imgur.com/vsVhLCn.jpg)
 
 
