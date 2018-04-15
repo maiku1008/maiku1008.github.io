@@ -1,11 +1,16 @@
 ---
 layout: default
-title: Michael Cuffaro, IT Guy
+title: sk1u's Blog
 ---
-<div class="blurb">
-	<h1>Hi there, I'm Michael!</h1>
-    <p>I'm best known as 'that IT Guy' at  <b>GiG</b>. Welcome to my page!<br>
-    <a href="/about">Read more about my life...</a></p>
+	<h1>{{ page.title }}</h1>
+	<ul class="posts">
 
+	  {% for post in site.posts %}
+      <li><span><b>{{ post.date | date_to_string }}</b></span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li><br>
 
-</div><!-- /.blurb -->
+        {{ post.content | strip_html | truncatewords:35}}
+            <a href="{{ post.url }}"> Read more...</a><br><br>
+	  {% endfor %}
+	</ul>
+
+{% include archive.html %}    

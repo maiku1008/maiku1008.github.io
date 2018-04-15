@@ -1,6 +1,7 @@
 name: Michael Cuffaro's Blog
 description: Musings, Documenting, Learning, Python, Geek stuff.
 url: https://sk1u.com
+future: true
 
 markdown: kramdown
 highlighter: rouge
