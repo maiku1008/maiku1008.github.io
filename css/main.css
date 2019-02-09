@@ -8,6 +8,7 @@ body {
      margin: 0;
      padding: 0;
 }
+
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     padding: 0px;
@@ -22,11 +23,11 @@ nav ul li, footer ul li {
 
 a {
     text-decoration: none;
-    color: #999;
+    color: green;
 }
 
 a:hover {
-    text-decoration: underline;
+    color: lightgreen;
 }
 
 h1 {
@@ -45,24 +46,24 @@ h3 {
 }
 
 p {
-    font-size: 1.4em;
+    font-size: 1.18em;
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    line-height: 1.1em;
+    line-height: 1.2em;
     color: #333;
 }
 
 pre {
-    padding: 16px;
+    padding: 7px;
     overflow: auto;
-    line-height: 1.45;
-    background-color: #f6f8fa;
-    border-radius: 3px;
+    line-height: 1.80;
+    background-color: #E2FBE0;
+    border-radius: 2px;
 }
 
 img {
     display: block;
     margin: auto;
-    width: 50%;
+    width: 70%;
 }
 
 footer {
@@ -70,6 +71,19 @@ footer {
     font-size: .8em;
     text-align: center;
     padding: 0 10;
+}
+
+code {
+    padding: 7px;
+}
+
+
+.title-blog {
+    color: #BCC2C6;
+    text-align: right;
+    padding-right: 30px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .inner {
@@ -97,8 +111,8 @@ footer {
     }
 }
 
-ul.posts { 
-    margin: 20px auto 40px; 
+ul.posts {
+    margin: 20px auto 40px;
     font-size: 1.5em;
 }
 
