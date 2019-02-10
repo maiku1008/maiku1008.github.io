@@ -2,7 +2,7 @@
 layout: post
 title: "Pyenv, Neovim, Virtualenv, Homebrew, and a few gotchas"
 description: installation
-tags: pyenv python vim neovim virtualenv macosx homebrew dev workflow
+tags: python
 date: 2018-04-16
 ---
 
@@ -105,7 +105,9 @@ $ pyenv deactivate
 ## Installing NeoVim and jedi-vim
 
 For NeoVim, I used, you guess it, Homebrew:
-`$ brew install neovim`
+```
+$ brew install neovim
+```
 
 At which point, we can run it with:
 ```
