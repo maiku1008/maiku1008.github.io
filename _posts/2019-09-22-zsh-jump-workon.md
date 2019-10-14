@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Easy workflow for switching Python virtual environments"
+title: "Easy workflow for switching Python virtual environments with ZSH!"
 description: Setting up your dev environment to do cool hacky stuff
-tags: dev python
+tags: dev python zsh
 date: 2019-09-22
 ---
 
@@ -146,6 +146,10 @@ function prompt()
     fi
 }
 ```
+
+Alternatively to the above ugly bash hack, we can simply use the [ZSH Plugin for virtualenvwrapper](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/virtualenvwrapper), which does pretty much the same thing, but better. :)
+
+Also with the plugin, Python environments with the same name as the repository will be automatically activated on cd, unless we use the `.venv` method as described.
 
 After we source our rc file (or close and reopen our terminal),
 We can jump around like this:
