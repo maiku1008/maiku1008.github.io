@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Easy workflow for switching Python virtual environments with ZSH!"
+title: "Easy workflow for switching Python virtual environments"
 description: Setting up your dev environment to do cool hacky stuff
 tags: dev python zsh
 date: 2019-09-22
