@@ -31,7 +31,7 @@ a:hover {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 2.5em;
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
 
@@ -87,7 +87,7 @@ ol {
 
 .title-blog {
     color: #BCC2C6;
-    text-align: right;
+    text-align: left;
     padding-right: 30px;
     margin-top: 3px;
     margin-bottom: 3px;
@@ -120,7 +120,7 @@ ol {
 
 ul.posts {
     margin: 20px auto 40px;
-    font-size: 1.5em;
+    font-size: 1.4em;
 }
 
 ul.posts li {

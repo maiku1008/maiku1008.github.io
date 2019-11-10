@@ -6,8 +6,6 @@ tags: dev python zsh
 date: 2019-09-22
 ---
 
-## The Problem
-
 The problem I set out to solve was simply to avoid manually typing pyenv/venv commands
 when moving into directories containing different projects, and around my directory tree.
 
