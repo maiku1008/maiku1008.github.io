@@ -51,7 +51,7 @@ Other important subdirectories includ **/etc/skel**, and **/etc/init**.
 
 ### /home
 User **home** directories, including personal settings, files, etc.
-All personal configurations, data, executable programs would be placed under this directory, for example under **/home/sk1u**.
+All personal configurations, data, executable programs would be placed under this directory, for example under **/home/micuffaro**.
 
 Users can always substitute the environmental variable $HOME for their root directory, or the shorthand **~**:
 
