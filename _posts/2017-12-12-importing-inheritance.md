@@ -8,7 +8,7 @@ date: 2017-12-12
 
 
 I recently stumbled into an issue that had me stumped for a couple days.
-I have been writing a small [tool](https://github.com/sk1u/domain-google-calendar) that would read a list of domains, their registrar, and their date of expiry,
+I have been writing a small [tool](https://github.com/micuffaro/domain-google-calendar) that would read a list of domains, their registrar, and their date of expiry,
 and would take that data to create a Google Calendar reminder for each domain.
 
 It's relatively simple to do, knowing how to get Python to read csv files, loop into them, and interfacing with the Google API, for which there is [excellent documentation](https://developers.google.com/api-client-library/python/start/get_started).

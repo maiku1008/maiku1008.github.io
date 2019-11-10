@@ -212,6 +212,6 @@ Looping these this way seems like a much cleaner way to do things, for readbilit
 
 ## To Conclude
 
-The above can all be found in my [checkdomain](https://github.com/sk1u/checkdomain) project.
+The above can all be found in my [checkdomain](https://github.com/micuffaro/checkdomain) project.
 
 Go is awesome, and I'm looking forward to mess around with it more.
