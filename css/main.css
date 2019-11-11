@@ -114,7 +114,7 @@ ol {
 ul.posts {
     margin: 20px auto 40px;
     font-size: 1.7em;
-    padding-left: 10%;
+    padding-left: 8%;
     font-weight: normal;
     line-height: 1.1em;
 }
@@ -124,7 +124,7 @@ ul.posts li {
 }
 
 .about {
-    padding-left: 10%;
+    padding-left: 8%;
 }
 
 .column {
@@ -198,7 +198,7 @@ ul.posts li {
     padding: 0px 10px;
 }
   
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     .sidenav {
         display: none;
     }
