@@ -66,19 +66,6 @@ img {
     width: 100%;
 }
 
- /* Three image containers (use 25% for four, and 50% for two, etc) */
- .column {
-    float: inline-start;
-    width: 26%;
-    padding: 3px;
-  }
-  
-/* Clear floats after image containers */
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
-} 
 
 code {
     font-size: 1.2em;
@@ -113,12 +100,12 @@ ol {
     padding: 8px 15px;
     border-radius: 5px;
     margin: 1.5 * $spacing-unit 0;
-
+    
     a {
         font-weight: 700;
         color: #fff;
         margin-left: 10px;
-
+        
         hover {
             border-bottom: 1px dashed #fff;
         }
@@ -128,13 +115,35 @@ ol {
 ul.posts {
     margin: 20px auto 40px;
     font-size: 1.4em;
+    padding-left: 10%;
 }
 
 ul.posts li {
     list-style: none;
 }
 
- /* The sidebar menu */
+.about {
+    padding-left: 10%;
+}
+
+.column {
+    float: inline-start;
+    width: 26%;
+    padding: 3px;
+}
+  
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+} 
+
+.notes {
+    padding-left: 10%;
+}
+
+/* The sidebar menu */
+
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 15%; /* Set the width of the sidebar */
@@ -180,6 +189,7 @@ ul.posts li {
     .sidenav a {font-size: 18px;}
 } 
 
+/* Fuck this button so much */
 .bmc-button img{
     width: 20px !important;
     margin-bottom: 1px !important;
