@@ -63,15 +63,22 @@ pre {
 img {
     display: block;
     margin: auto;
-    width: 90%;
+    width: 100%;
 }
 
-footer {
-    border-top: 1px solid #d5d5d5;
-    font-size: .8em;
-    text-align: center;
-    padding: 0 10;
-}
+ /* Three image containers (use 25% for four, and 50% for two, etc) */
+ .column {
+    float: inline-start;
+    width: 26%;
+    padding: 3px;
+  }
+  
+/* Clear floats after image containers */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+} 
 
 code {
     font-size: 1.2em;
@@ -88,7 +95,6 @@ ol {
 .title-blog {
     color: #BCC2C6;
     text-align: left;
-    /* padding-right: 30px; */
     padding: 6px 8px 6px 16px;
     margin-top: 3px;
     margin-bottom: 3px;
@@ -129,88 +135,89 @@ ul.posts li {
 }
 
  /* The sidebar menu */
- .sidenav {
+.sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 250px; /* Set the width of the sidebar */
+    width: 15%; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #2b2b2b; /* Black */
+    background-color: #2b2b2b; 
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
-  }
+}
+
+.sidenav-footer {
+    padding-left: 0.5%;
+    position: absolute;
+    bottom: 2%;
+    width:100%;
+}
   
-  /* The navigation menu links */
-  .sidenav a {
+/* The navigation menu links */
+.sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
-  }
+}
   
-  /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
     color: #f1f1f1;
-  }
+}
 
-  .sidenav img {
-      height: 32px;
-      width: 32px;
-  }
-  
-  /* Style page content */
-  .main {
+/* Style page content */
+.main {
     margin-left: 160px; /* Same as the width of the sidebar */
     padding: 0px 10px;
-  }
+}
   
-  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
-  } 
+} 
 
-  .bmc-button img{
-    width: 25px !important;
+.bmc-button img{
+    width: 20px !important;
     margin-bottom: 1px !important;
     box-shadow: none !important;
     border: none !important;
     vertical-align: middle !important;
-  }
+}
   
-    .bmc-button {
-        padding: 7px 5px 7px 10px !important;
-        line-height: 35px !important;
-        height:51px !important;
-        min-width:217px !important;
-        text-decoration: none !important;
-        display:inline-flex !important;
-        color:#ffffff !important;
-        background-color:#FF813F !important;border-radius: 5px !important;
-        border: 1px solid transparent !important;
-        padding: 7px 5px 7px 10px !important;
-        font-size: 22px !important;
-        letter-spacing: 0.6px !important;
-        box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
-        -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
-        margin: 0 auto !important;
-        font-family:'Cookie', cursive !important;
-        -webkit-box-sizing: border-box !important;
-        box-sizing: border-box !important;
-        -o-transition: 0.3s all linear !important;
-        -webkit-transition: 0.3s all linear !important;
-        -moz-transition: 0.3s all linear !important;
-        -ms-transition: 0.3s all linear !important;
-        transition: 0.3s all linear !important;
-    }
-    .bmc-button:hover, 
-    .bmc-button:active, 
-    .bmc-button:focus {
+.bmc-button {
+    padding: 12%;
+    line-height: 150% !important;
+    height: 50% !important;
+    width: 85% !important;
+    text-decoration: none !important;
+    display:inline-flex !important;
+    color:#ffffff !important;
+    background-color:#FF813F !important;
+    border-radius: 5px !important;
+    border: 1px solid transparent !important;
+    font-size: 22px !important;
+    letter-spacing: 0.6px !important;
+    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+    margin: 5% !important;
+    font-family:'Cookie', cursive !important;
+    -webkit-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+    -o-transition: 0.3s all linear !important;
+    -webkit-transition: 0.3s all linear !important;
+    -moz-transition: 0.3s all linear !important;
+    -ms-transition: 0.3s all linear !important;
+    transition: 0.3s all linear !important;
+}
+
+.bmc-button:hover, .bmc-button:active, .bmc-button:focus {
     -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
     text-decoration: none !important;
     box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
     opacity: 0.85 !important;
     color:#ffffff !important;
-    }
+}
