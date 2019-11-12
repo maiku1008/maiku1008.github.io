@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Pyenv, Neovim, Virtualenv, Homebrew, and a few gotchas"
+title: "Making pyenv and neovim play nice (and a few gotchas found along the way)"
 description: installation
 tags: python
 date: 2018-04-16
@@ -56,14 +56,14 @@ Which sucks.
 
 Spent a good amount of time googling, asking around, playing with different plugins, but nope, no joy.
 The internet was suggesting three things:
-1. suck it up, cause similar [issues](https://github.com/davidhalter/jedi-vim/issues/744) were not tackled yet.
-2. tackle the issue myself, for which I feel I am not well versed enough (yet).
+1. Suck it up, cause similar [issues](https://github.com/davidhalter/jedi-vim/issues/744) were not tackled yet or at all..
+2. Tackle the issue myself, for which I feel I am not well versed enough (yet).
 3. Move to NeoVim plus Pyenv and jedi-vim, where things magically work.
 
 So here I am with my brand new NeoVim setup.  
 Of course I had to go through a few gotchas to get this to work, which I will share here for all those out there hacking around with this.
 
-## Installing PyEnv
+## Installing Pyenv
 
 The first thing I did was to ditch virtualenv and use Pyenv instead.
 I used homebrew to do that.
@@ -149,4 +149,4 @@ Run a health check in nvim to make sure all is ok:
 ```
 :CheckHealth
 ```
-Once this is done, we are all set! Time to write some Python :)
+Once this is done, we are all set with a reachable pyenv environment in our shiny new neovim setup!
