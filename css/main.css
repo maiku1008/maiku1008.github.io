@@ -156,20 +156,18 @@ ul.posts li {
 }
 
 /* The sidebar menu */
-
 .sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 12%; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
     left: 0;
     background-color: #2b2b2b; 
-    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-x: hidden;
     padding-top: 20px;
 }
 
-/* The navigation menu links */
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -189,7 +187,6 @@ ul.posts li {
 }
 
 .sidenav-footer a {
-    /* padding: 6px 8px 6px 16px; */
     text-decoration: none;
     font-size: 11px;
     color: #818181;
@@ -205,7 +202,7 @@ ul.posts li {
 }
 
 .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
+    margin-left: 160px;
     padding: 0px 10px;
 }
   
@@ -221,7 +218,6 @@ ul.posts li {
     .notes {
         padding: 0%;
         margin: 0px;
-
     }
 }
 
