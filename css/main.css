@@ -1,7 +1,24 @@
-header {
+.header {
+    display: none;
     background: #2b2b2b;
-    padding: 20px;
     text-align: center;
+    margin-top: 0px;
+}
+
+.header nav ul{
+    background: #2b2b2b;
+    padding: 12px;
+    margin: 0px;
+    text-align: center;
+}
+
+.header a {
+    text-decoration: none;
+    color: #818181;
+}
+
+.header a:hover {
+    color: #BCC2C6;
 }
 
 body {
@@ -76,14 +93,6 @@ hr {
 
 ol {
     font-size: 1.2em;
-}
-
-.title-blog {
-    color: #BCC2C6;
-    text-align: left;
-    padding: 6px 8px 6px 16px;
-    margin-top: 3px;
-    margin-bottom: 3px;
 }
 
 .inner {
@@ -198,9 +207,19 @@ ul.posts li {
     padding: 0px 10px;
 }
   
-@media (max-width: 1100px) {
+@media (max-width: 1100px) , (max-height: 500px) {
     .sidenav {
         display: none;
+    }
+
+    .header {
+        display: inline;
+    }
+
+    .notes {
+        padding: 0%;
+        margin: 0px;
+
     }
 }
 
