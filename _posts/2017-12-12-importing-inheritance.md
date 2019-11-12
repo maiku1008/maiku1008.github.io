@@ -8,16 +8,16 @@ date: 2017-12-12
 
 
 I recently stumbled into an issue that had me stumped for a couple days.
-I have been writing a small [tool](https://github.com/micuffaro/domain-google-calendar) that would read a list of domains, their registrar, and their date of expiry,
-and would take that data to create a Google Calendar reminder for each domain.
+I have been writing a small [tool](https://github.com/micuffaro/) that would read a list of domains, their registrar, and their date of expiry;
+it would then take that data to create a Google Calendar reminder for each domain.
 
-It's relatively simple to do, knowing how to get Python to read csv files, loop into them, and interfacing with the Google API, for which there is [excellent documentation](https://developers.google.com/api-client-library/python/start/get_started).
+It's relatively simple to do, by knowing how to get Python to read csv files, loop into them, and interfacing with the Google API, for which there is [excellent documentation](https://developers.google.com/api-client-library/python/start/get_started).
 
 This is one of various automation tools that I have been putting together, to make my life easier both at GiG and for my webhosting adventures.
 
 Anyway, the program is divided into two parts, the first being the *google\_calendar\_toolkit.py*, which has first of all the google authentication flow, and secondly a (very small, for now) collection of functions which will be executing various tasks related to Google Calendar, for me to comfortably call in my other programs.
 
-The second part, is the *bulk\_event\_adder*, the main portion of the program, which takes the CSV file as its input and has the program logic built in it, importing the *add\_reminder()* func from *google\_calendar\_toolkit*.
+The second part is the *bulk\_event\_adder*, the main portion of the program, which takes the CSV file as its input and has the program logic built in it, importing the *add\_reminder()* func from *google\_calendar\_toolkit*.
 
 ![Imgur](https://i.imgur.com/2S4xrsW.png)
 
@@ -30,6 +30,7 @@ And have it work its magic that way.
 I would have done that in the simplest way possible, by starting with:
 ```
 from google_calendar_toolkit import add_domain_expiry_event
+
 import csv
 import time
 import sys
@@ -43,7 +44,7 @@ with open(sys.argv[1], 'rb') as csvfile:
 
 `sys.argv[1]` being the desired filename.
 
-Of course trying to run this via:
+Of course trying to run this with:
 ```
 python bulk_event_adder.py list.csv
 ```
@@ -62,8 +63,6 @@ I've used similar code before and it always worked, like clockwork.
 
 The program was _NOT_ behaving the way I intended, plus it was throwing an error which I wouldn't expect from the `sys` module.
 
-![alt text](https://i.imgur.com/GoI5PWr.jpg)
-
 Some time after scouring [Stack Overflow](https://stackoverflow.com/), it hit me: my code was fine. A code snippet used in *google\_calendar\_toolkit* was the culprit:
 
 ```
@@ -76,7 +75,7 @@ except ImportError:
 
 This is defined nearly at the beginning of the file, and used as part of the oauth2 flow for authenticating to Google.
 
-My main *bulk\_event\_adder* was infact inheriting that import, and behaving as if i had imported and initialized argparse.
+My main *bulk\_event\_adder* was infact inheriting that import, and behaving as if I had imported and initialized argparse.
 
 This is because when we write:
 ```
@@ -117,4 +116,3 @@ In the case of my *domain-google-calendar*, I simply chose to call the csv by it
 ```
 python bulk_event_adder.py
 ```
-

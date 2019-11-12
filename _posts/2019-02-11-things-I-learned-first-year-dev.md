@@ -23,7 +23,6 @@ The following are a few observations and reflections, on some of the things I ha
 
 ### 1. The more I know, the more I know how much I don't know
 
-![u know nothing](https://i.imgur.com/xOopDPG.jpg)
 Cliche'? sure. But it is very, very true.
 The best devs in my team are just as clueless as I am when facing a new problem, they are just more experienced at figuring it all out.
 
@@ -62,23 +61,21 @@ Overall pair programming is a win for everyone, and you should do more of it!
 I really have no idea how else to call this.
 
 So you are sitting next to a senior developer, and you explain to them a problem you have been having.
-Immediately they go to the part of the code where presumably the problem is happening, and start following the code through imports, checking out inherited properties, overridden attributes, digging and diggin to other parts of the code you didn't even know existed.
+Immediately they go to the part of the code where presumably the problem is happening, and start following the code through imports, checking out inherited properties, overridden attributes, digging and digging to other parts of the code you didn't even know existed.
 
 Their environment is setup in such a way where it is easy for them to go-to the definitions of any part of the code, being in the same codebase, in third party modules, or in the standard library; they manage to go through to the root of the issue and from there suggest the best way(s) forward.
 
-The first time I saw this being done it blew my mind, although admittedly, the developer in question was doing this so fast that I could barely keep up with this train of thought.
+The first time I saw this being done it blew my mind, although admittedly, the developer in question was doing this so fast that I could barely keep up with his train of thought.
 
 In any case, they didn't have the solution to my problem straight off the top of their head, but they had the experience, the mindset and the tools to figure it out there and then.
 
 This skill is one of the most important I have seen and what defines to me a great developer from a good one; It is also one I have been trying to incorporate into my workflow more and more.
 
-![elementary, my dear watson](https://i.imgur.com/4IpsUbm.jpg)
-
 This also brings me to the next couple points:
 
 ### 5. Read the fucking docs
 
-Don't skim through the examples and be like, "I got this, let me hack on this, I'll figure it out eventually".
+Don't skim through the examples and be like, "I got this, let me hack on it, I'll figure it out eventually".
 
 You will spend the next 6 hours getting nowhere, just to, as a last resort, more attentively read that line in the docs you skimmed through.... and find there the answer to your question (true story).
 
@@ -124,7 +121,7 @@ If you can't go to conferences for whatever constraint, very very often conferen
 Really take the time to sit through some of those and absorb ideas, concepts and news.
 
 Listen to podcasts, have a twitter feed, or check out hacker news or ars technica or something.
-The tech world is changing all the time, and you need to keep up to date or be left
+The tech world is changing all the time, and you need to keep up to date or be left behind.
 
 ### 9. Ask questions
 

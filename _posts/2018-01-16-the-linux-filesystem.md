@@ -12,12 +12,13 @@ With that out of the way, let's begin!
 
 ![Old fart who likes writing fantasy books about winter and people dying](https://i.imgur.com/L6uT1Mn.jpg)
 
-Like all UNIX-based operating systems, Linux consists of a single big filesystem tree. It's designed as an inverted tree with the root directory **/** at the top of the tree.
-Different filesystems, locally present in different partitions, or sometimes on the network, can be **mounted** at various points within this large logical filesystem.
+Like all UNIX-based operating systems, Linux consists of a single big filesystem tree.  
+It's designed as an inverted tree with the root directory **/** at the top of that tree.  
+Different filesystems, locally present in different partitions, or sometimes on the network, can be **mounted** at various points within this large logical filesystem.  
 
 Regardless of how things are actually joined together, it all just looks like one filesystem, with applications not caring at all about what physical device files actually reside on.
 
-The following is a list of the main directories normally found under **/**:
+The following is a list of the main directories normally found under **/**:  
 
 ![du](https://i.imgur.com/u8vsKGC.png)
 
@@ -128,9 +129,3 @@ This directory has been in use for several years by major Linux distributions, b
 The [Filesystem Hierarchy Standard](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html), previously created by Free Standards and now passed onto the Linux Foundation, standardizes the filesystem structure as the above across all distributions.
 We may however find additional distribution-specific dirs found under the root directory.
 These may include things like  **/misc** or **/tftpboot**,
-
-Finally, I leave you with scumbag linux guy to wrap up this mess:
-
-![Linux Douchebag](https://i.imgur.com/vsVhLCn.jpg)
-
-

@@ -6,17 +6,12 @@ tags: python
 date: 2018-04-16
 ---
 
-Right, since we are gonna talk about this, I just have to do it:
+For my development workflow and IDE, I've recently decided to move from the excellent [Vim](https://www.vim.org/), and into the magical world of [NeoVim](https://neovim.io/), which is essentially Vim on steroids.
 
-![exiting vim joke](https://i.imgur.com/udoQWm1.jpg)
+No, but seriously, NeoVim has a [few](https://neovim.io/charter/) features that are really interesting, but the real reason for moving is that, as a Python dev, I need to be able to look at source code and definitions very often, while hacking on my code.  
+The wonderful [jedi-vim](https://github.com/davidhalter/jedi-vim) plugin normally allows me to do just that, when it comes to my local project. But because I am using virtual environments extensively in my work, such as with [virtualenv](https://virtualenv.pypa.io/en/stable/) and/or [pyenv](https://github.com/pyenv/pyenv), I have a problem on my hands:
 
-Now that we've got at least one of the jokes about exiting Vim out of our system, let's get started.
-
-For my dev workflow and IDE, I've recently decided to move from the excellent [Vim](https://www.vim.org/), and into the magical world of [NeoVim](https://neovim.io/), which is essentially Vim on steroids.
-
-No, but seriously, NeoVim has a [few](https://neovim.io/charter/) features that are really interesting, but the real reason for moving is that, as a Python dev, I need to be able to look at source code and definitions very often, while hacking on my code. The wonderful [jedi-vim](https://github.com/davidhalter/jedi-vim) plugin normally allows me to do just that, when it comes to my local project. But because I am using virtual environments extensively in my work, such as with [virtualenv](https://virtualenv.pypa.io/en/stable/) and/or [pyenv](https://github.com/pyenv/pyenv), I have a problem on my hands:
-
-**jedi-vim is unfortunately unaware of virtual environments**.
+**Jedi-vim is painfully unaware of virtual environments**.
 
 So if I for example,
 
@@ -65,10 +60,7 @@ The internet was suggesting three things:
 2. tackle the issue myself, for which I feel I am not well versed enough (yet).
 3. Move to NeoVim plus Pyenv and jedi-vim, where things magically work.
 
-So here I am with my brand new NeoVim setup.
-
-![I need to watch Raiders again.](https://i.imgur.com/69oHSIc.jpg)
-
+So here I am with my brand new NeoVim setup.  
 Of course I had to go through a few gotchas to get this to work, which I will share here for all those out there hacking around with this.
 
 ## Installing PyEnv
@@ -158,5 +150,3 @@ Run a health check in nvim to make sure all is ok:
 :CheckHealth
 ```
 Once this is done, we are all set! Time to write some Python :)
-
-![funstuff](https://i.imgur.com/o5dzyQs.jpg)

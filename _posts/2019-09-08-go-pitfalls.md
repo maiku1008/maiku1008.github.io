@@ -163,9 +163,9 @@ func main() {
 }
 ```
 
-## Parametrize tests with a slice
+## Parametrize tests with a struct
 
-Finally, I parametrized different calls by using a slice, like described in the [official docs](https://github.com/golang/go/wiki/TableDrivenTests).
+Finally, I parametrized different calls by using a struct, like described in the [official docs](https://github.com/golang/go/wiki/TableDrivenTests).
 
 ```
 // A struct for testing the different calls

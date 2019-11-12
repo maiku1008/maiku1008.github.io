@@ -12,8 +12,7 @@ when moving into directories containing different projects, and around my direct
 ![theproblem](https://i.gyazo.com/6ad3c719def2828f1f1f2dffc654c90a.gif)
 
 If you are like me, you would be working on different things at different times, and
-switching projects around seamlessly becomes a requirement to avoid waste of time
-and loss of attention and context.
+switching projects around seamlessly becomes a requirement to avoid waste of time, attention and context.
 
 ### My environment
 
@@ -23,7 +22,7 @@ set up with [ZSH](https://www.zsh.org/) and [oh-my-zsh](https://github.com/robby
 ## Virtualenvwrapper
 
 Essentially I opted to use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/#) instead of pyenv, which I had been using for a few months before.
-This nifty library contains an feature called [workon](https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html#controlling-the-active-environment), that allows one, among other things, to activate separate Python environments.
+This nifty library contains a feature called [workon](https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html#controlling-the-active-environment), that allows one, among other things, to activate separate Python environments.
 
 From the [virtualenvwrapper's docs](https://virtualenvwrapper.readthedocs.io/en/latest/install.html):
 
@@ -80,7 +79,7 @@ Now that we have an easy way to separate and use our virtual environments, let's
 
 ## Jump
 
-[Jump](https://github.com/gsamokovarov/jump) is a shell integrations which uses fuzzy search to helps you move around your directory structure more easily.
+[Jump](https://github.com/gsamokovarov/jump) is a shell integration which uses fuzzy search to help you move around your directory structure more easily.
 It is a Go application that essentially records your keystrokes and your most used directories
 into its own database.
 Jump allows you to do stuff like this:
@@ -110,7 +109,7 @@ which is entirely written in shell script.
 ## Moving around seemlessly between projects
 
 Now you can jump anywhere in your directory tree, and switch virtual environments as your heart desires.
-But how do we make the experience more seamless?
+But how do we make the experience even more seamless?
 
 We can hack our bashrc / zshrc file by adding a snippet of bash, which will run every time we `cd` into a new directory, checking the presence of a `.venv` file.
 
