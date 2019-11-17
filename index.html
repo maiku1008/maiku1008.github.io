@@ -2,16 +2,17 @@
 layout: default
 title: Michael Cuffaro's Blog
 ---
-	<ul class="posts">
+<ul class="posts">
 
-	  {% for post in site.posts %}
-      <li><span><b>{{ post.date | date_to_string }}</b></span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li><br>
+    {% for post in site.posts %}
+    <li><span><b>{{ post.date | date_to_string }}</b></span> » <a href="{{ post.url }}"
+            title="{{ post.title }}">{{ post.title }}</a></li><br>
 
-        {{ post.content | strip_html | truncatewords: 60 }}
-            <br><br><a href="{{ post.url }}"> Read more...</a><br><br>
-            <hr>
-            <br>
-	  {% endfor %}
-	</ul>
+    {{ post.content | strip_html | truncatewords: 60 }}
+    <br><br><a href="{{ post.url }}"> Read more...</a><br><br>
+    <hr>
+    <br>
+    {% endfor %}
+</ul>
 
 {% include archive.html %}
