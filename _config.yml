@@ -1,5 +1,5 @@
 name: Michael Cuffaro's Blog
-description: Musings, Documenting, Learning, Python, Geek stuff.
+description: Musings, Documenting, Learning, Python, Devops, Lifestyle, Geek stuff.
 url: https://blog.cuffaro.com
 future: true
 
@@ -8,8 +8,5 @@ highlighter: rouge
 
 permalink: /blog/:year/:month/:day/:title
 
-# Disqus Comments
 disqus:
-    # Leave shortname blank to disable comments site-wide.
-    # Disable comments for any post by adding `comments: false` to that post's YAML Front Matter.
     shortname: micuffaro
