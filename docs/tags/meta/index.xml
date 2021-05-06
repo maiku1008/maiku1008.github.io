@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>meta on Michael Cuffaro</title>
+    <link>https://blog.cuffaro.com/tags/meta/</link>
+    <description>Recent content in meta on Michael Cuffaro</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Mon, 11 Feb 2019 19:42:41 +0200</lastBuildDate><atom:link href="https://blog.cuffaro.com/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Things I learned during my first year as a Junior Developer</title>
+      <link>https://blog.cuffaro.com/blog/2019-02-11-things-i-learned-first-year-dev/</link>
+      <pubDate>Mon, 11 Feb 2019 19:42:41 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2019-02-11-things-i-learned-first-year-dev/</guid>
+      <description>It&amp;rsquo;s been an interesting 2018: it was the first year I have coded full-time while getting also paid for it. Before that, I worked mainly as internal IT support for a couple different companies, where my coding skills weren&amp;rsquo;t being tested as much as right now.
+I won&amp;rsquo;t lie, the year wasn&amp;rsquo;t always easy. I am surrounded by some brilliant people and I have very often felt some sort of inferiority complex that brought me down many a times; I thought that my experience (or lack thereof) was slowing down the team or not allowing us to achieve the goals we were supposed to achieve.</description>
+    </item>
+    
+  </channel>
+</rss>

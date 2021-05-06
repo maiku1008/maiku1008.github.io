@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>development on Michael Cuffaro</title>
+    <link>https://blog.cuffaro.com/tags/development/</link>
+    <description>Recent content in development on Michael Cuffaro</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Sun, 22 Sep 2019 20:44:43 +0200</lastBuildDate><atom:link href="https://blog.cuffaro.com/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Easy workflow for switching Python virtual environments</title>
+      <link>https://blog.cuffaro.com/blog/2019-09-22-zsh-jump-workon/</link>
+      <pubDate>Sun, 22 Sep 2019 20:44:43 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2019-09-22-zsh-jump-workon/</guid>
+      <description>The problem I set out to solve was simply to avoid manually typing pyenv/venv commands when moving into directories containing different projects, and around my directory tree.
+If you are like me, you would be working on different things at different times, and switching projects around seamlessly becomes a requirement to avoid waste of time, attention and context.
+My environment For the sake of clarity, I am using a Macbook Pro with macOS Mojave, and I have iTerm2 set up with ZSH and oh-my-zsh as my shell.</description>
+    </item>
+    
+  </channel>
+</rss>

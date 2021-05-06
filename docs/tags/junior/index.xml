@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>junior on Michael Cuffaro</title>
+    <link>https://blog.cuffaro.com/tags/junior/</link>
+    <description>Recent content in junior on Michael Cuffaro</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Wed, 08 May 2019 20:56:19 +0200</lastBuildDate><atom:link href="https://blog.cuffaro.com/tags/junior/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pitfalls I encountered while learning Go</title>
+      <link>https://blog.cuffaro.com/blog/2019-05-08-go-pitfalls/</link>
+      <pubDate>Wed, 08 May 2019 20:56:19 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2019-05-08-go-pitfalls/</guid>
+      <description>I started learning Go on and off out of curiosity, late last year.
+Being mainly a Python developer, I figured learning a different programming language would help to broaden my horizons.
+Recently though, we adopted the language for some work projects, therefore I took the plunge and got to really hacking around with it.
+The following are some noobie gotchas that I bumped into during development of my latest project (link below).</description>
+    </item>
+    
+  </channel>
+</rss>

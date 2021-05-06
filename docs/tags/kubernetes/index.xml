@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on Michael Cuffaro</title>
+    <link>https://blog.cuffaro.com/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on Michael Cuffaro</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Sun, 24 Jan 2021 19:42:47 +0200</lastBuildDate><atom:link href="https://blog.cuffaro.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My experience passing CKA and CKAD</title>
+      <link>https://blog.cuffaro.com/blog/2021-01-24-cka-ckad/</link>
+      <pubDate>Sun, 24 Jan 2021 19:42:47 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2021-01-24-cka-ckad/</guid>
+      <description>In December last year I was able to sit for the coveted Certified Kubernetes Administrator and Certified Kubernetes Application Developer exams, and clear them both after some preparation.
+This post is meant to share my exam experience, and all the materials used.
+TL;DR  Read the exam questions carefully. Know imperative commands with kubectl like the back of your hand. Get comfortable looking things up on kubernetes.io . Build a bookmark folder in Chrome with relevant pages in kubernetes.</description>
+    </item>
+    
+  </channel>
+</rss>

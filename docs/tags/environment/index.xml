@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>environment on Michael Cuffaro</title>
+    <link>https://blog.cuffaro.com/tags/environment/</link>
+    <description>Recent content in environment on Michael Cuffaro</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Mon, 16 Apr 2018 19:37:10 +0200</lastBuildDate><atom:link href="https://blog.cuffaro.com/tags/environment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Making pyenv and neovim play nice (and a few gotchas found along the way)</title>
+      <link>https://blog.cuffaro.com/blog/2018-04-16-pyenv-neovim/</link>
+      <pubDate>Mon, 16 Apr 2018 19:37:10 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2018-04-16-pyenv-neovim/</guid>
+      <description>For my development workflow and IDE, I&amp;rsquo;ve recently decided to move from Vim , to NeoVim , which is essentially Vim on steroids.
+No, but seriously, NeoVim has a few features that are really interesting, but the real reason for moving is that, as a Python dev, I need to be able to look at source code and definitions very often, while hacking on my code. The wonderful jedi-vim plugin normally allows me to do just that, when it comes to my local project.</description>
+    </item>
+    
+  </channel>
+</rss>

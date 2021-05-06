@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>My experience passing CKA and CKAD | Michael Cuffaro</title>
+
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="Obtaining both Kubernetes certifications for fun and for profit">
+  <meta name="keywords" content="experience , devops , cloud , kubernetes , cncf">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="My experience passing CKA and CKAD" />
+  <meta name="twitter:description" content="Obtaining both Kubernetes certifications for fun and for profit"/>
+  <meta name="twitter:site" content="@micuffaro" />
+  <meta name="twitter:creator" content="https://twitter.com/micuffaro" />
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+
+  
+  
+    
+ 
+  
+  
+
+  
+
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.86d1effd4c412b85ac13db53a90c473a0f256f789b821e131125c9aa25cb6a6d.css" integrity="sha256-htHv/UxBK4WsE9tTqQxHOg8lb3ibgh4TESXJqiXLam0="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+  
+
+  
+   
+    
+
+<script type="application/ld+json">
+  
+    {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.cuffaro.com\/"
+      },
+      "articleSection" : "blog",
+      "name" : "My experience passing CKA and CKAD",
+      "headline" : "My experience passing CKA and CKAD",
+      "description" : "Obtaining both Kubernetes certifications for fun and for profit",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2021",
+      "datePublished": "2021-01-24 19:42:47 \u002b0200 \u002b0200",
+      "dateModified" : "2021-01-24 19:42:47 \u002b0200 \u002b0200",
+      "url" : "https:\/\/blog.cuffaro.com\/blog\/2021-01-24-cka-ckad\/",
+      "wordCount" : "1788",
+      "keywords" : ["experience", "devops", "cloud", "kubernetes", "cncf", "Blog"]
+    }
+  
+  </script>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+</div>
+
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">about</a>
+      </li>
+    
+      <li>
+        <a  class="active"
+         href="/blog">blog</a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            <h1 id="post__title">My experience passing CKA and CKAD</h1>
+            <time datetime="2021-01-24 19:42:47 &#43;0200 &#43;0200" class="post__date">Jan 24 2021</time> 
+          </header>
+          <article class="post__content">
+              
+<p>In December last year I was able to sit for the coveted Certified Kubernetes Administrator and Certified Kubernetes Application Developer exams, and clear them both after some preparation.</p>
+<p>This post is meant to share my exam experience, and all the materials used.</p>
+<h3 id="tldr">TL;DR<a class="anchor" href="#tldr">#</a></h3>
+<ul>
+<li>Read the exam questions carefully.</li>
+<li>Know imperative commands with <code>kubectl</code> like the back of your hand.</li>
+<li>Get comfortable looking things up on <a href="https://kubernetes.io/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>kubernetes.io</a>
+.</li>
+<li>Build a bookmark folder in Chrome with relevant pages in kubernetes.io: you can use it during the exam!</li>
+<li>Seriously, read the damn questions carefully.</li>
+<li>Practice, practice and practice more.</li>
+</ul>
+<h3 id="the-exams">The exams<a class="anchor" href="#the-exams">#</a></h3>
+<p>The exam for any of these Kubernetes certifications consists in solving a set of tasks, in a 2 hour terminal session.</p>
+<p>There are 17 scenarios/questions for CKA, and 19 for CKAD.
+The whole time, a proctor is watching and listening to you via webcam and microphone, and seeing the content of your screens (you can use more than one).
+You communicate with the proctor only via a live chat application which is part of the PSI interface for the exam.</p>
+<p>At the beginning they will ask you to show your ID, and then you will need to show them your working area from the webcam.
+You will need to show your desk, and the room you&rsquo;re in.
+Ensure that nothing written is visibile on the walls, and that you are the only person in the room.</p>
+<p>Once the exam starts, the proctor may ask you every once in a while to show your hands to the webcam.
+Don&rsquo;t bother asking questions about the exam itself, chances are the proctor really doesn&rsquo;t know about the subject and is only there to ensure you don&rsquo;t cheat.
+You will need to share your screens for the proctor to see.
+If you have 2 screens you can have the exam terminal on one, and the tab with k8s docs on the other.</p>
+<p>In the terminal itself, you are given 6 or so k8s clusters, and you will need to switch between them.
+You will always have a command printed at the beginning of each question, for easy copy paste:</p>
+<pre><code>kubectl config use-context bla
+</code></pre>
+<p>Make sure to <strong>use it</strong>!</p>
+<p>Do not be fooled by the fact that you are able to search documentation during the exam.
+The tasks that you will be given are often complex ones; time is of the essence! If you waste it while reading up docs you will not be able to complete all of the tasks in time.</p>
+<h3 id="resources-used">Resources used<a class="anchor" href="#resources-used">#</a></h3>
+<ul>
+<li>Official docs <a href="https://kubernetes.io/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>kubernetes.io</a>
+</li>
+<li><a href="https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Certified Kubernetes Administrator by Mumshad Mannambeth (Udemy)</a>
+</li>
+<li><a href="https://www.udemy.com/course/certified-kubernetes-application-developer/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Certified Kubernetes Application Developer by Mumshad Mannambeth (Udemy)</a>
+</li>
+<li>Exam simulator <a href="https://killer.sh/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>killer.sh</a>
+</li>
+<li>Kodekloud community slack</li>
+<li>Kubernetes community slack</li>
+</ul>
+<h3 id="extra-reading">Extra reading<a class="anchor" href="#extra-reading">#</a></h3>
+<ul>
+<li><a href="https://www.amazon.com/Cloud-Native-DevOps-Kubernetes-Applications/dp/1492040762/ref=sr_1_1?crid=24TO6CY3JORE4&amp;dchild=1&amp;keywords=cloud&#43;native&#43;devops&#43;with&#43;kubernetes&amp;qid=1612074068&amp;sprefix=cloud&#43;native&#43;dev%2Caps%2C260&amp;sr=8-1" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Cloud Native Devops with Kubernetes</a>
+, by John Arundel and Justin Domingus.</li>
+<li><a href="https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure/dp/1492046531/ref=pd_bxgy_img_2/140-4642137-3991249?_encoding=UTF8&amp;pd_rd_i=1492046531&amp;pd_rd_r=9b0a86b5-7a7a-48b7-af2d-8caf1db3aeef&amp;pd_rd_w=8ickO&amp;pd_rd_wg=F4zT9&amp;pf_rd_p=f325d01c-4658-4593-be83-3e12ca663f0e&amp;pf_rd_r=GERZBQPX5AYFFCB14S8R&amp;psc=1&amp;refRID=GERZBQPX5AYFFCB14S8R" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Kubernetes Up &amp; Running</a>
+, by Brendan Burns, Joe Beda and Kelsey Hightower.</li>
+</ul>
+<h2 id="cka">CKA<a class="anchor" href="#cka">#</a></h2>
+<p>I will start with the CKA, as it is the first exam I attempted.</p>
+<h3 id="objectives">Objectives<a class="anchor" href="#objectives">#</a></h3>
+<p>The CKA ensures we have the skillset to setup and maintain a Kubernetes cluster, and manage it by using best practices.</p>
+<h3 id="requirements">Requirements<a class="anchor" href="#requirements">#</a></h3>
+<p>As this exam is aimed at the Systems administrator/devops engineer, some linux as well as infrastructure skills are expected, such as:</p>
+<ul>
+<li>Knowledge of Linux OS.</li>
+<li>Being comfortable on the terminal.</li>
+<li>Knowing how to quickly edit files with text editors like Vi/Vim.</li>
+<li>Working knowledge of networking concepts.</li>
+<li>Working knowledge of TLS encryption concepts.</li>
+<li>Working knowledge of docker and containerization concepts.</li>
+</ul>
+<p>A deep dive is done on Kubernetes concepts and architecture during the indicated courses.</p>
+<h3 id="study-plan">Study plan<a class="anchor" href="#study-plan">#</a></h3>
+<p>I began studying around the end of September 2020, by purchasing Mumshad Mannambeth&rsquo;s excellent Udemy course for both CKA and CKAD, both on sale at the time.
+That was a major source of material for me, as the courses included access to Katacoda/Kodekloud practice labs, and access to a Slack community where the trainer and other exam-takers participated.
+The videos of Mumshad&rsquo;s course are very well done, each in the 5-10 minute range in length, slowly and clearly explaining each concept.
+I would get to practice that concept later with labs provided by Mumshad&rsquo;s platform, KodeKloud.</p>
+<p>The course itself has a section later on where we must manually install a Kubernetes cluster from scratch on a local vagrant setup, based on <a href="https://github.com/kelseyhightower/kubernetes-the-hard-way" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Kelsey Hightower&rsquo;s excellent Kubernetes the Hard way project</a>
+ (the original project leverages infrastructure on Google Cloud instead).
+During the same course, we get to setup another cluster by using <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>kubeadm</a>
+, which is part of the exam curriculum.</p>
+<p>I would say that before taking the exam, I spent an average of about 1 hour every day watching the course videos and playing around with the labs (around 2 hours or more during weekends), for a couple months;
+I took care of understanding every concept presented in the videos, and verified my knowledge with the labs and on a local cluster where I spent some practice time on, on top of study time.
+I also re-did all of the course labs multiple times until I knew almost all of the answers by heart, and could get around them easily.</p>
+<p>When something was unclear, the slack communities on kodekloud and kubernetes were always very helpful, always answering all of my questions, no matter how dumb I thought they were :)</p>
+<p>I made sure to know <code>kubectl</code> imperative commands like the back of my hand, and building a library of bookmarks in my browser with relevant pages ready, as we are allowed an extra tab with the documentation during the exam.</p>
+<p>After 2 months of that, I felt like I was ready.</p>
+<h3 id="cka-exam-attempt-1">CKA Exam attempt #1<a class="anchor" href="#cka-exam-attempt-1">#</a></h3>
+<p>I booked the exam for end of November, on a Saturday morning at 8AM, and sat for it in the guest room of my home.
+The exam setup time with the proctor went pretty smoothly, and I was able to start on time.</p>
+<p>I was not so confident by the end of the two hours. After 36 hours I got the news that I failed that attempt with 60% (minimum passing grade is 66%).
+What went wrong for me was that I did not read/understand one specific question, which was related to ETCD backup and restore (part of the official curriculum); because of this, I ended up performing a task that effectively made one of the exam clusters unavailable.</p>
+<p>Looking back, I am quite sure I invalidated several correct answers due to this mistake, which resulted in the score.
+The method of how to backup/restore an ETCD cluster was also not entirely clear to me at the time, so I was not 100% sure of what I was doing.</p>
+<p>Clearly I overestimated my knowledge, and depended too much on memorizing certain commands on one study platform, instead of being completely confident in all concepts and commands applied.</p>
+<h3 id="new-study-plan">New study plan<a class="anchor" href="#new-study-plan">#</a></h3>
+<p>Enter <a href="https://killer.sh/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>killer.sh</a>
+.
+A CKA/CKAD/CKS exam simulator created by <a href="https://www.linkedin.com/in/kimwuestkamp/" 
+  
+   target="_blank" rel="noreferrer noopener" 
+>Kim Wuestkampf</a>
+.</p>
+<p>For CKA, the simulator offered 25 HARD questions to be done in 2 hours, with guided and comprehensive answers made available after the alotted time.
+Such answers also offered different ways to do things, for maximized learning experience.</p>
+<p>This alternative platform helped a lot in understanding things that weren&rsquo;t clear to me, and to practice more varied scenarios.
+Completing a killer.sh simulator in under two hours gives good confidence in being able to tackle the real exam.</p>
+<h3 id="cka-exam-attempt-2">CKA Exam attempt #2<a class="anchor" href="#cka-exam-attempt-2">#</a></h3>
+<p>I booked the exam one week after getting the results of the previous one.
+The exam setup experience was again pretty smooth and I was up and ready to go 10 minutes before the start time.</p>
+<p>I felt pretty confident the whole time and finished up all of the questions around 1 hour and 10 minutes later.</p>
+<p>The results came around 36 hours after the end of the exam, in an email.
+Score was a pass with 85% :)!
+As it is not possible to see the actual answers, to this day I don&rsquo;t really don&rsquo;t know what I got wrong, but am still satisfied with the result.</p>
+<h2 id="ckad">CKAD<a class="anchor" href="#ckad">#</a></h2>
+<p>I took the CKAD exam while the knowledge of the previous training was still fresh, so I felt like I had an easier time with this one.</p>
+<h3 id="objectives-1">Objectives<a class="anchor" href="#objectives-1">#</a></h3>
+<p>To be able to efficiently design and implement working kubernetes production workloads.</p>
+<h3 id="requirements-1">Requirements<a class="anchor" href="#requirements-1">#</a></h3>
+<p>Not so much system administration knowledge, but more focus on k8s concepts, architecture and best practices.
+Actual programming experience is not required for the exam (although in &ldquo;real life&rdquo; it will probably not hurt either ;) ).</p>
+<h3 id="study-plan-1">Study plan<a class="anchor" href="#study-plan-1">#</a></h3>
+<p>I booked the CKAD exam roughly for 3 weeks after passing the CKA.
+In those 3 weeks, I took my time and spent again around 30min to 1 hour a day on Mumshad&rsquo;s course and labs.</p>
+<p>When exam time was closer, I booked two sessions on killer.sh and focused on practicing there.
+I challenged myself by finishing all the questions under 2 hours, and afterwards going through slowly through the answers section on the site.
+This was very helpful and allowed me to learn different, more effective approaches.</p>
+<h3 id="ckad-exam-attempt-1">CKAD Exam attempt #1<a class="anchor" href="#ckad-exam-attempt-1">#</a></h3>
+<p>I once again took the exam from the guest room in my home.</p>
+<p>This time the exam setup with the proctor wasn&rsquo;t so smooth.
+The connection from my end and theirs wasn&rsquo;t great, and we kept getting disconnected from the session. Webcam images weren&rsquo;t so clear so they had to ask me to show identification more than once. It took about 40 minutes to start the actual exam, and that did get me a bit stressed out.</p>
+<p>Nevertheless, I felt comfortable and finished all the questions in about 1 hour and a half.
+36 hours later, I got the email with the good news of a pass with 83%.
+Doing the CKA before really helped with the whole experience.</p>
+<h2 id="conclusion">Conclusion<a class="anchor" href="#conclusion">#</a></h2>
+<p>From my experience, I would say that the hardest exam was the one for CKA, as it didn&rsquo;t just go through the new knowledge of k8s concepts, but also on existing understanding of systems administration.
+I felt like doing CKAD immediately afterwards made it a bit easier, as the knowledge was still fresh.</p>
+<p>The CKAD questions however were much more time consuming, in the sense that one task would require to perform several smaller tasks quickly, building a workload and making sure everything works together.</p>
+<p>All in all, I feel the time trying to tackle these certifications was well spent; since the exams are performance based, they are fair in what they expect from you, and ensure that once the certs are in your hands, you really actually know your stuff. :)</p>
+<p>Next on my list is the new Certified Kubernets Security Specialist certfication, for which I will follow a similar approach as the above.
+Perhaps a blog post focusing on that will come soon.</p>
+
+
+              
+          </article>
+          
+
+<ul class="tags__list">
+    
+    <li class="tag__item">
+        <a class="tag__link" href="https://blog.cuffaro.com/tags/experience/">experience</a>
+    </li>
+    <li class="tag__item">
+        <a class="tag__link" href="https://blog.cuffaro.com/tags/devops/">devops</a>
+    </li>
+    <li class="tag__item">
+        <a class="tag__link" href="https://blog.cuffaro.com/tags/cloud/">cloud</a>
+    </li>
+    <li class="tag__item">
+        <a class="tag__link" href="https://blog.cuffaro.com/tags/kubernetes/">kubernetes</a>
+    </li>
+    <li class="tag__item">
+        <a class="tag__link" href="https://blog.cuffaro.com/tags/cncf/">cncf</a>
+    </li></ul>
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="https://blog.cuffaro.com/blog/2019-09-22-zsh-jump-workon/">
+        <span class="pagination__label">Previous Post</span>
+        <span class="pagination__title">Easy workflow for switching Python virtual environments</span>
+    </a>
+  
+
+  
+</div>
+
+          
+          <footer class="post__footer">
+            
+
+
+<div class="social-icons">
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="Twitter"
+         href="https://twitter.com/micuffaro"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://blog.cuffaro.com/svg/twitter.svg')"></div>
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="LinkedIn"
+         href="https://www.linkedin.com/in/michael-cuffaro-709354109/"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://blog.cuffaro.com/svg/linkedin.svg')"></div>
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="GitHub"
+         href="https://github.com/micuffaro"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://blog.cuffaro.com/svg/github.svg')"></div>
+      </a>
+    
+  
+     
+    
+      <a class="social-icons__link" rel="me" title="Email"
+         href="mailto:michael@cuffaro.com"
+         target="_blank" rel="noopener">
+        <div class="social-icons__icon" style="background-image: url('https://blog.cuffaro.com/svg/email.svg')"></div>
+      </a>
+    
+     
+</div>
+
+            <p>© 2021</p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+    
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.575dda8d49ee02639942c63564273e6da972ab531dda26a08800bdcb477cbd7f.js" integrity="sha256-V13ajUnuAmOZQsY1ZCc&#43;balyq1Md2iagiAC9y0d8vX8=" crossorigin="anonymous"></script>
+  
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/components/prism-core.min.js"></script>
+
+  
+  <script src="https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js"
+    data-autoloader-path="https://unpkg.com/prismjs@1.20.0/components/"></script>
+
+  
+
+
+</body>
+
+</html>

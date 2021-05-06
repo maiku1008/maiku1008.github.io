@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Michael Cuffaro</title>
+    <link>https://blog.cuffaro.com/blog/</link>
+    <description>Recent content in Blogs on Michael Cuffaro</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© {year}</copyright>
+    <lastBuildDate>Sun, 24 Jan 2021 19:42:47 +0200</lastBuildDate><atom:link href="https://blog.cuffaro.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My experience passing CKA and CKAD</title>
+      <link>https://blog.cuffaro.com/blog/2021-01-24-cka-ckad/</link>
+      <pubDate>Sun, 24 Jan 2021 19:42:47 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2021-01-24-cka-ckad/</guid>
+      <description>In December last year I was able to sit for the coveted Certified Kubernetes Administrator and Certified Kubernetes Application Developer exams, and clear them both after some preparation.
+This post is meant to share my exam experience, and all the materials used.
+TL;DR  Read the exam questions carefully. Know imperative commands with kubectl like the back of your hand. Get comfortable looking things up on kubernetes.io . Build a bookmark folder in Chrome with relevant pages in kubernetes.</description>
+    </item>
+    
+    <item>
+      <title>Easy workflow for switching Python virtual environments</title>
+      <link>https://blog.cuffaro.com/blog/2019-09-22-zsh-jump-workon/</link>
+      <pubDate>Sun, 22 Sep 2019 20:44:43 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2019-09-22-zsh-jump-workon/</guid>
+      <description>The problem I set out to solve was simply to avoid manually typing pyenv/venv commands when moving into directories containing different projects, and around my directory tree.
+If you are like me, you would be working on different things at different times, and switching projects around seamlessly becomes a requirement to avoid waste of time, attention and context.
+My environment For the sake of clarity, I am using a Macbook Pro with macOS Mojave, and I have iTerm2 set up with ZSH and oh-my-zsh as my shell.</description>
+    </item>
+    
+    <item>
+      <title>Pitfalls I encountered while learning Go</title>
+      <link>https://blog.cuffaro.com/blog/2019-05-08-go-pitfalls/</link>
+      <pubDate>Wed, 08 May 2019 20:56:19 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2019-05-08-go-pitfalls/</guid>
+      <description>I started learning Go on and off out of curiosity, late last year.
+Being mainly a Python developer, I figured learning a different programming language would help to broaden my horizons.
+Recently though, we adopted the language for some work projects, therefore I took the plunge and got to really hacking around with it.
+The following are some noobie gotchas that I bumped into during development of my latest project (link below).</description>
+    </item>
+    
+    <item>
+      <title>Things I learned during my first year as a Junior Developer</title>
+      <link>https://blog.cuffaro.com/blog/2019-02-11-things-i-learned-first-year-dev/</link>
+      <pubDate>Mon, 11 Feb 2019 19:42:41 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2019-02-11-things-i-learned-first-year-dev/</guid>
+      <description>It&amp;rsquo;s been an interesting 2018: it was the first year I have coded full-time while getting also paid for it. Before that, I worked mainly as internal IT support for a couple different companies, where my coding skills weren&amp;rsquo;t being tested as much as right now.
+I won&amp;rsquo;t lie, the year wasn&amp;rsquo;t always easy. I am surrounded by some brilliant people and I have very often felt some sort of inferiority complex that brought me down many a times; I thought that my experience (or lack thereof) was slowing down the team or not allowing us to achieve the goals we were supposed to achieve.</description>
+    </item>
+    
+    <item>
+      <title>Making pyenv and neovim play nice (and a few gotchas found along the way)</title>
+      <link>https://blog.cuffaro.com/blog/2018-04-16-pyenv-neovim/</link>
+      <pubDate>Mon, 16 Apr 2018 19:37:10 +0200</pubDate>
+      
+      <guid>https://blog.cuffaro.com/blog/2018-04-16-pyenv-neovim/</guid>
+      <description>For my development workflow and IDE, I&amp;rsquo;ve recently decided to move from Vim , to NeoVim , which is essentially Vim on steroids.
+No, but seriously, NeoVim has a few features that are really interesting, but the real reason for moving is that, as a Python dev, I need to be able to look at source code and definitions very often, while hacking on my code. The wonderful jedi-vim plugin normally allows me to do just that, when it comes to my local project.</description>
+    </item>
+    
+  </channel>
+</rss>
