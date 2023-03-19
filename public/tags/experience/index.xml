@@ -1,0 +1,27 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>experience - Tag - cuffaro.com</title>
+        <link>https://cuffaro.com/tags/experience/</link>
+        <description>experience - Tag - cuffaro.com</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>michael@cuffaro.com (Mike)</managingEditor>
+            <webMaster>michael@cuffaro.com (Mike)</webMaster><copyright>© {year}</copyright><lastBuildDate>Sun, 20 Mar 2022 08:42:47 &#43;0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/experience/" rel="self" type="application/rss+xml" /><item>
+    <title>My experience passing Certified Kubernetes Security Specialist (CKS) exam</title>
+    <link>https://cuffaro.com/2022-03-20-cks-experience/</link>
+    <pubDate>Sun, 20 Mar 2022 08:42:47 &#43;0200</pubDate>
+    <author>Mike</author>
+    <guid>https://cuffaro.com/2022-03-20-cks-experience/</guid>
+    <description><![CDATA[Earlier in 2021, right after taking the exams for CKA and CKAD in succession (the experience of which I documented here), I quickly booked the brand-new (at least at the time) CKS exam. Life happened, and I&rsquo;ve ended up procrastinating the study and preparation process until now 😅.
+Today I got the great news of a PASS, and once again I would like to share my experience in obtaining this tough certification.]]></description>
+</item>
+<item>
+    <title>My experience passing CKA and CKAD</title>
+    <link>https://cuffaro.com/2021-01-24-cka-ckad/</link>
+    <pubDate>Sun, 24 Jan 2021 19:42:47 &#43;0200</pubDate>
+    <author>Mike</author>
+    <guid>https://cuffaro.com/2021-01-24-cka-ckad/</guid>
+    <description><![CDATA[In December last year I was able to sit for the coveted Certified Kubernetes Administrator and Certified Kubernetes Application Developer exams, and clear them both after some preparation.
+This post is meant to share my exam experience, and all the materials used.
+TL;DR Read the exam questions carefully. Know imperative commands with kubectl like the back of your hand. Get comfortable looking things up on kubernetes.io. Build a bookmark folder in Chrome with relevant pages in kubernetes.]]></description>
+</item>
+</channel>
+</rss>
