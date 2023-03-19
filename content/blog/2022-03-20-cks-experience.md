@@ -9,7 +9,7 @@ math: false
 toc: false
 ---
 
-Earlier in 2021, right after taking the exams for CKA and CKAD in succession (the experience of which I documented [here](https://blog.cuffaro.com/blog/2021-01-24-cka-ckad/)), I quickly booked the brand-new (at least at the time) CKS exam. Life happened, and I've ended up procrastinating the study and preparation process until now 😅.
+Earlier in 2021, right after taking the exams for CKA and CKAD in succession (the experience of which I documented [here](https://cuffaro.com/blog/2021-01-24-cka-ckad/)), I quickly booked the brand-new (at least at the time) CKS exam. Life happened, and I've ended up procrastinating the study and preparation process until now 😅.
 
 Today I got the great news of a PASS, and once again I would like to share my experience in obtaining this tough certification.
 

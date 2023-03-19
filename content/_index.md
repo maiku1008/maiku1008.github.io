@@ -1,10 +1,6 @@
 ---
-heading: "Hi, I'm Michael"
+heading: "cuffaro.com"
 subheading: "
-Father, husband and geek.
-Software engineer with a passion for DevOps.
-
-Welcome to my blog.
+Mike's personal blog.
 "
-handle: "micuffaro"
 ---

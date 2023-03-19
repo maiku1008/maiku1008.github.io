@@ -3,9 +3,9 @@ publishDir = "docs"
 theme = "hugo-theme-codex"
 
 # Override these settings with your own
-title = "Michael Cuffaro"
+title = "Mike Cuffaro"
 languageCode = "en-us"
-baseURL = "https://blog.cuffaro.com/"
+baseURL = "https://cuffaro.com/"
 copyright = "© {year}"
 
 # Add your Disqus shortname here.
