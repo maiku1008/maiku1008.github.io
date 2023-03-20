@@ -108,11 +108,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     #  Custom content (HTML format is supported)
     custom = ''
     #  whether to show Hugo and theme info
-    hugo = true
+    hugo = false
     #  whether to show copyright info
     copyright = true
     #  whether to show the author
-    author = true
+    author = false
     # Site creation time
     since = 2018
     # ICP info only in China (HTML format is supported)
@@ -510,7 +510,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     enable = false
     # Google Analytics
     [params.analytics.google]
-      id = ""
+      id = "G-JQGY3PSRXT"
       # whether to anonymize IP
       anonymizeIP = true
     # Fathom Analytics
