@@ -18,7 +18,7 @@ Again though, I work with brilliant people! They have helped me out immensely an
 
 Of course, I do not feel I have a firm grasp of whatever is going on,
 
-![dog picture](https://i.imgur.com/gjSgBW6.jpg)
+![](https://i.imgur.com/gjSgBW6.jpg "dog picture")
 
 But I do feel like maybe I can understand and figure out things with a little bit more confidence than before.
 
@@ -153,4 +153,4 @@ In some cases also, you end up helping out someone in need, sometimes months aft
 
 I have the feeling I have barely scratched the surface, but feel like I had a very productive first year. I plan to continue on this course, and hopefully add to this article at the end of my second year as a software developer. :)
 
-![confused](https://i.imgur.com/Xwp41UT.png)
+![](https://i.imgur.com/Xwp41UT.png "confused")
