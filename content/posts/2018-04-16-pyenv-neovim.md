@@ -19,39 +19,39 @@ The wonderful [jedi-vim](https://github.com/davidhalter/jedi-vim) plugin normall
 So if I for example,
 
 setup a virtual environments in my project dir as such:
-```
+```bash
 $ virtualenv -m python 3 venv
 ```
 
 Activate the environment:
-```
+```bash
 $ source venv/bin/activate
 ```
 
 and then install Django:
-```
+```bash
 $ pip install django
 ```
 
 Initialise a django app with:
-```
+```bash
 $ django-admin startproject mysite
 ```
 
 Open the urls file:
-```
+```bash
 $ vim mysite/urls.py
 ```
 
 Placing the cursor on an object we are importing,
 such as url, and running the jedi-vim goto definition shortcut (mine is `,d`):
-```
+```bash
 from django.conf.urls import url
 from django.contrib import admin
 ```
 
 Returns the following error:
-```
+```bash
 jedi-vim: Couldn't find any definitions for this.
 ```
 
@@ -71,7 +71,7 @@ Of course I had to go through a few gotchas to get this to work, which I will sh
 The first thing I did was to ditch virtualenv and use Pyenv instead.
 I used homebrew to do that.
 
-```
+```bash
 $ brew update
 $ brew install pyenv
 $ brew install pyenv-virtualenv
@@ -79,7 +79,7 @@ $ brew install pyenv-virtualenv
 
 We still need to complete the install by adding a few environment variables to our shell profiles.
 So depending on our preferred shell, we use ~/.bash_profile , or ~/.zshrc or whatever else:
-```
+```bash
 $ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> <profile_file>
 $ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> <profile_file>
 $ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> <profile_file>
@@ -88,7 +88,7 @@ $ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\
 (more info on [PyEnv Github](https://github.com/pyenv/pyenv))
 
 We can then initialize some environments and play around:
-```
+```bash
 $ pyenv install 3.6.5
 $ pyenv install 2.7.14
 $ pyenv virtualenv 2.7.14 my_p2_project
@@ -100,18 +100,18 @@ $ pyenv deactivate
 ## Installing NeoVim and jedi-vim
 
 For NeoVim, I used, you guess it, Homebrew:
-```
+```bash
 $ brew install neovim
 ```
 
 At which point, we can run it with:
-```
+```bash
 $ nvim
 ```
 
 I then proceeded to install a bunch of plugins for my Python stuff.
 I took a great deal of inspiration from [Fisa's NeoVim configuration](https://raw.githubusercontent.com/fisadev/fisa-nvim-config/master/init.vim) for that, but for the sake of this guide, we can simply install the jedi-vim plugin by adding the following to our ~/.config/nvim/init.vim :
-```
+```bash
 call plug#begin('~/.config/nvim/plugged')
 Plug 'davidhalter/jedi-vim
 call plug#end()
@@ -122,14 +122,14 @@ We can then reopen `nvim` and run a `:PlugInstall`
 ## Now for our gotcha part
 
 For being able to use Python 2/3 plugins,we will need the neovim Python module, with:
-```
+```bash
 pip install neovim
 ```
 
 But this would mean that we'd have to install the neovim plugin in all the virtual environments we create.
 To get around this, we need to create 1-2 virtual environments just for neovim, and add a line in our `init.vim` that will tell nvim to look into those envs for its plugin. We do the following:
 
-```
+```bash
 pyenv virtualenv 2.7.14 neovim2
 pyenv virtualenv 3.6.5 neovim3
 
@@ -143,14 +143,13 @@ pyenv which python  # Note the path
 ```
 
 We will need to add also the following to our ~/.config/nvim/init.vim:
-```
+```bash
 let g:python_host_prog = '/path/to/neovim2/bin/python'
 let g:python3_host_prog = '/path/to/neovim3/bin/python'
 ```
 
 Run a health check in nvim to make sure all is ok:
-```
+```bash
 :CheckHealth
 ```
 Once this is done, we are all set with a reachable pyenv environment in our shiny new neovim setup!
-

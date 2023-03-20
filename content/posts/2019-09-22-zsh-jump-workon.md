@@ -32,7 +32,7 @@ From the [virtualenvwrapper's docs](https://virtualenvwrapper.readthedocs.io/en/
 ### Install with Pip
 virtualenvwrapper should be installed into the same global site-packages area where virtualenv is installed. You may need administrative privileges to do that. The easiest way to install it is using pip:
 
-```
+```bash
 $ pip install virtualenvwrapper
 ```
 
@@ -40,7 +40,7 @@ $ pip install virtualenvwrapper
 
 Add three lines to your shell startup file (.zshrc, .bashrc, .profile, etc.) to set the location where the virtual environments should live, the location of your development project directories, and the location of the script installed with this package:
 
-```
+```bash
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
@@ -50,28 +50,28 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 Also from the docs, here is a quick list of commands to get started with workon:
 
-```
+```bash
 workon
 ```
 A list of environments, empty, is printed.
 
-```
+```bash
 mkvirtualenv temp
 ```
 A new environment, temp is created and activated.
 It copies the current version of python to make it.
 
-```
+```bash
 workon
 ```
 This time, the temp environment is included.
 
-```
+```bash
 workon temp
 ```
 Activates that environment
 
-```
+```bash
 deactivate
 ```
 Deactivates that same environment
@@ -93,13 +93,13 @@ Jump allows you to do stuff like this:
 
 On Mac:
 
-```
+```bash
 brew install jump
 ```
 
 After which, you need to add the following line in your zshrc
 
-```
+```bash
 eval "$(jump shell)"
 ```
 
@@ -118,12 +118,12 @@ We can hack our bashrc / zshrc file by adding a snippet of bash, which will run 
 
 Said `.venv` file will simply contain the name of the virtual environment we wish to activate.
 
-```
+```bash
 echo "fooenv" >> .venv
 ```
 
 We then need to modify our zshrc and add this (admittedly hacky) snippet:
-```
+```bash
 # Workon
 # Support for bash
 PROMPT_COMMAND='prompt'
@@ -157,4 +157,3 @@ We can jump around like this:
 ![gyazo thing jumping around](https://i.gyazo.com/9ffecfe8a17a51b022c1c53679dc0bb5.gif)
 
 The inspiration for this article comes from [this blog post](https://justin.abrah.ms/dotfiles/zsh.html#sec-2-7)
-

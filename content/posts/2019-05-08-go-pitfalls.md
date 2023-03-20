@@ -20,7 +20,7 @@ Mostly these came around while trying to figure out how to use mocks and asserts
 ## Validate if an interface is satisfied by a struct
 
 Here is the first snippet:
-```
+```go
 package requests
 
 import (
@@ -51,7 +51,7 @@ func (mockClient *MockClient) Do(req *http.Request) (*http.Response, error) {
 ```
 
 Zooming into the interesting part:
-```
+```go
 // Validate satisfaction of interface
 var _ ClientInterface = (*MockClient)(nil)
 var _ ClientInterface = (*http.Client)(nil)
@@ -69,7 +69,7 @@ We will be using our custom interface in the next step.
 ## Use interfaces instead of structs to pass data around
 
 A key function of my app is the following:
-```
+```go
 import "net/http"
 
 // GetResponse gets a response
@@ -93,13 +93,13 @@ so I had to create my own mock version of `*http.Client`, and use it as an argum
 
 It turns out that Go is pretty anal about its types (no real surprise there!).
 
-```
+```bash
 ./requests_test.go:47:28: cannot use mockClient (type *MockClient) as type *http.Client in argument to GetResponse
 ```
 
 So I resolved instead to pass it my interface, `ClientInterface`, which implements `Do()`, as described above.
 
-```
+```go
 import "net/http"
 
 // GetResponse gets a response
@@ -120,7 +120,7 @@ func GetResponse(req *http.Request, c ClientInterface) {
 
 At this point, I just wanted to see the test work, so in a hurry I loaded a couple nil pointers into the arguments I needed, as such:
 
-```
+```go
     // Initialize mock object
     mockClient := &MockClient{}
 
@@ -147,7 +147,7 @@ If that pointer points to nothing we will get the above error.
 
 Time to fix that by creating a request object with some dummy content.
 
-```
+```go
 func main() {
 
     // Initialize mock object
@@ -169,7 +169,7 @@ func main() {
 
 Finally, I parametrized different calls by using a struct, like described in the [official docs](https://github.com/golang/go/wiki/TableDrivenTests).
 
-```
+```go
 // A struct for testing the different calls
 var responseTests = []struct {
     method       string
