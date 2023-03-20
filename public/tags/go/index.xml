@@ -3,12 +3,12 @@
         <title>go - Tag - cuffaro.com</title>
         <link>https://cuffaro.com/tags/go/</link>
         <description>go - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>michael@cuffaro.com (Mike)</managingEditor>
-            <webMaster>michael@cuffaro.com (Mike)</webMaster><copyright>© {year}</copyright><lastBuildDate>Wed, 08 May 2019 20:56:19 &#43;0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/go/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>m@cuffaro.com (mike)</managingEditor>
+            <webMaster>m@cuffaro.com (mike)</webMaster><copyright>© {year}</copyright><lastBuildDate>Wed, 08 May 2019 20:56:19 &#43;0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/go/" rel="self" type="application/rss+xml" /><item>
     <title>Pitfalls I encountered while learning Go</title>
     <link>https://cuffaro.com/2019-05-08-go-pitfalls/</link>
     <pubDate>Wed, 08 May 2019 20:56:19 &#43;0200</pubDate>
-    <author>Mike</author>
+    <author>mike</author>
     <guid>https://cuffaro.com/2019-05-08-go-pitfalls/</guid>
     <description><![CDATA[I started learning Go on and off out of curiosity, late last year.
 Being mainly a Python developer, I figured learning a different programming language would help to broaden my horizons.
