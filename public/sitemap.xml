@@ -2,17 +2,15 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://localhost:1313/2024-11-30-new-post-with-random-thoughts/</loc><lastmod>2024-11-28T20:42:37&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://localhost:1313/</loc><lastmod>2024-11-28T20:42:37&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://localhost:1313/2024-11-30-future-dev/</loc><lastmod>2024-11-28T20:15:57&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://localhost:1313/posts/</loc><lastmod>2024-11-28T20:15:57&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/career/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:1313/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/dev/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/development/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/experience/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/growth/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/2023-03-26-am-i-a-senior-engineer-yet/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/junior/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://localhost:1313/posts/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/senior/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://localhost:1313/tags/go/</loc><lastmod>2023-03-20T08:00:47&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
