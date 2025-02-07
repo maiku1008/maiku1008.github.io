@@ -1,0 +1,131 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>cuffaro.com</title>
+        <link>http://localhost:1313/</link>
+        <description>cuffaro.com</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 28 Nov 2024 20:42:37 &#43;0100</lastBuildDate>
+            <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>2024 11 30 Future Dev</title>
+    <link>http://localhost:1313/2024-11-30-future-dev/</link>
+    <pubDate>Thu, 28 Nov 2024 20:15:57 &#43;0100</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2024-11-30-future-dev/</guid>
+    <description><![CDATA[<p>What is required to be a good developer in the future?
+Up until now, my answer would have been to get really good at one or two programming languages.</p>
+<p>These days I&rsquo;m not so sure.
+Because of the different AI assistants available to us, coding some application even in a language that I never worked with before, is not that hard.
+Most programming languages nowadays pretty much resemble each other</p>]]></description>
+</item>
+<item>
+    <title>I&#39;ve been programming full time for the past 5 years. Am I a senior engineer yet?</title>
+    <link>http://localhost:1313/2023-03-26-am-i-a-senior-engineer-yet/</link>
+    <pubDate>Sun, 26 Mar 2023 08:00:41 &#43;0200</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2023-03-26-am-i-a-senior-engineer-yet/</guid>
+    <description><![CDATA[<p>When I started my career in software, I&rsquo;ve always wondered when I would finally be a &ldquo;senior&rdquo; engineer.</p>
+<p>Is it a matter of years of experience? Does it just happen suddenly?
+After a few years on the job, I can tell that the answer is not so straightforward.</p>
+<p><figure><a class="lightgallery" href="/google_engineer.gif" title="/google_engineer.gif" data-thumbnail="/google_engineer.gif" data-sub-html="<h2>a senior engineer from google</h2>">
+        
+    </a><figcaption class="image-caption">a senior engineer from google</figcaption>
+    </figure></p>
+<h2 id="a-little-background-about-me">A little background about me</h2>
+<p>I&rsquo;m a self-taught programmer, and never had formal education in Computer Science or anything like that.</p>]]></description>
+</item>
+<item>
+    <title>Speeding up a Go cli application with concurrency</title>
+    <link>http://localhost:1313/2023-03-20-go-concurrency/</link>
+    <pubDate>Mon, 20 Mar 2023 08:00:47 &#43;0200</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2023-03-20-go-concurrency/</guid>
+    <description><![CDATA[<h2 id="premise">Premise</h2>
+<p>A few months ago I worked with a company which provided fully functional backend for online multiplayer games.
+As part of their product portfolio, they provided their customers with a cli utility, called <code>ds-uploader</code> (dedicated server uploader).</p>
+<p>Written in Go, this CLI helped the customer:</p>
+<ul>
+<li>Process all files and assets in a directory of their choice containing their game server.</li>
+<li>Synchronize each file to a remote object storage bucket (meaning to upload only files that are new or modified).</li>
+<li>From those uploaded files, build a container image.</li>
+<li>Pass that container image to another service, which would then be responsible to run it.</li>
+</ul>
+<p>Most of the implementation details involved calling different services, both belonging to the service provider, and to the cloud provider of choice (in this case, AWS).</p>]]></description>
+</item>
+<item>
+    <title>My experience passing Certified Kubernetes Security Specialist (CKS) exam</title>
+    <link>http://localhost:1313/2022-03-20-cks-experience/</link>
+    <pubDate>Sun, 20 Mar 2022 08:42:47 &#43;0200</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2022-03-20-cks-experience/</guid>
+    <description><![CDATA[<p>Earlier in 2021, right after taking the exams for CKA and CKAD in succession (the experience of which I documented <a href="https://cuffaro.com/blog/2021-01-24-cka-ckad/" target="_blank" rel="noopener noreffer ">here</a>), I quickly booked the brand-new (at least at the time) CKS exam. Life happened, and I&rsquo;ve ended up procrastinating the study and preparation process until now 😅.</p>
+<p>Today I got the great news of a PASS, and once again I would like to share my experience in obtaining this tough certification.</p>]]></description>
+</item>
+<item>
+    <title>My experience passing CKA and CKAD</title>
+    <link>http://localhost:1313/2021-01-24-cka-ckad/</link>
+    <pubDate>Sun, 24 Jan 2021 19:42:47 &#43;0200</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2021-01-24-cka-ckad/</guid>
+    <description><![CDATA[<p>In December last year I was able to sit for the coveted Certified Kubernetes Administrator and Certified Kubernetes Application Developer exams, and clear them both after some preparation.</p>
+<p>This post is meant to share my exam experience, and all the materials used.</p>
+<h3 id="tldr">TL;DR</h3>
+<ul>
+<li>Read the exam questions carefully.</li>
+<li>Know imperative commands with <code>kubectl</code> like the back of your hand.</li>
+<li>Get comfortable looking things up on <a href="https://kubernetes.io/" target="_blank" rel="noopener noreffer ">kubernetes.io</a>.</li>
+<li>Build a bookmark folder in Chrome with relevant pages in kubernetes.io: you can use it during the exam!</li>
+<li>Seriously, read the damn questions carefully.</li>
+<li>Practice, practice and practice more.</li>
+</ul>
+<h3 id="the-exams">The exams</h3>
+<p>The exam for any of these Kubernetes certifications consists in solving a set of tasks, in a 2 hour terminal session.</p>]]></description>
+</item>
+<item>
+    <title>Easy workflow for switching Python virtual environments</title>
+    <link>http://localhost:1313/2019-09-22-zsh-jump-workon/</link>
+    <pubDate>Sun, 22 Sep 2019 20:44:43 &#43;0200</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2019-09-22-zsh-jump-workon/</guid>
+    <description><![CDATA[<p>The problem I set out to solve was simply to avoid manually typing pyenv/venv commands
+when moving into directories containing different projects, and around my directory tree.</p>
+<p></p>
+<p>If you are like me, you would be working on different things at different times, and
+switching projects around seamlessly becomes a requirement to avoid waste of time, attention and context.</p>
+<h3 id="my-environment">My environment</h3>
+<p>For the sake of clarity, I am using a Macbook Pro with macOS Mojave, and I have iTerm2
+set up with <a href="https://www.zsh.org/" target="_blank" rel="noopener noreffer ">ZSH</a> and <a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener noreffer ">oh-my-zsh</a> as my shell.</p>]]></description>
+</item>
+<item>
+    <title>Pitfalls I encountered while learning Go</title>
+    <link>http://localhost:1313/2019-05-08-go-pitfalls/</link>
+    <pubDate>Wed, 08 May 2019 20:56:19 &#43;0200</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2019-05-08-go-pitfalls/</guid>
+    <description><![CDATA[<p>I started learning Go on and off out of curiosity, late last year.</p>
+<p>Being mainly a Python developer, I figured learning a different programming language would help to broaden my horizons.</p>
+<p>Recently though, we adopted the language for some work projects, therefore I took the plunge and got to really hacking around with it.</p>
+<p>The following are some noobie gotchas that I bumped into during development of my latest project (link below).
+Mostly these came around while trying to figure out how to use mocks and asserts in unit tests with the <a href="https://github.com/stretchr/testify" target="_blank" rel="noopener noreffer ">testify</a> collection of packages.</p>]]></description>
+</item>
+<item>
+    <title>Things I learned during my first year as a Junior Developer</title>
+    <link>http://localhost:1313/2019-02-11-things-i-learned-first-year-dev/</link>
+    <pubDate>Mon, 11 Feb 2019 19:42:41 &#43;0200</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2019-02-11-things-i-learned-first-year-dev/</guid>
+    <description><![CDATA[<p>It&rsquo;s been an interesting 2018: it was the first year I have coded full-time while getting also paid for it.
+Before that, I worked mainly as internal IT support for a couple different companies, where my coding skills weren&rsquo;t being tested as much as right now.</p>
+<p>I won&rsquo;t lie, the year wasn&rsquo;t always easy. I am surrounded by some brilliant people and I have very often felt some sort of inferiority complex that brought me down many a times; I thought that my experience (or lack thereof) was slowing down the team or not allowing us to achieve the goals we were supposed to achieve.</p>]]></description>
+</item>
+<item>
+    <title>Making pyenv and neovim play nice (and a few gotchas found along the way)</title>
+    <link>http://localhost:1313/2018-04-16-pyenv-neovim/</link>
+    <pubDate>Mon, 16 Apr 2018 19:37:10 &#43;0200</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2018-04-16-pyenv-neovim/</guid>
+    <description><![CDATA[<p>For my development workflow and IDE, I&rsquo;ve recently decided to move from <a href="https://www.vim.org/" target="_blank" rel="noopener noreffer ">Vim</a>, to <a href="https://neovim.io/" target="_blank" rel="noopener noreffer ">NeoVim</a>, which is essentially Vim on steroids.</p>
+<p>No, but seriously, NeoVim has a <a href="https://neovim.io/charter/" target="_blank" rel="noopener noreffer ">few</a> features that are really interesting, but the real reason for moving is that, as a Python dev, I need to be able to look at source code and definitions very often, while hacking on my code.
+The wonderful <a href="https://github.com/davidhalter/jedi-vim" target="_blank" rel="noopener noreffer ">jedi-vim</a> plugin normally allows me to do just that, when it comes to my local project. But because I am using virtual environments extensively in my work, such as with <a href="https://virtualenv.pypa.io/en/stable/" target="_blank" rel="noopener noreffer ">virtualenv</a> and/or <a href="https://github.com/pyenv/pyenv" target="_blank" rel="noopener noreffer ">pyenv</a>, I have a problem on my hands:</p>]]></description>
+</item>
+</channel>
+</rss>
