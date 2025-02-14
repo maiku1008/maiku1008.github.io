@@ -1,0 +1,29 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Basic Auth - Tag - cuffaro.com</title>
+        <link>http://localhost:1313/tags/basic-auth/</link>
+        <description>Basic Auth - Tag - cuffaro.com</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 10 Mar 2025 20:43:37 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/tags/basic-auth/" rel="self" type="application/rss+xml" /><item>
+    <title>Squid Proxy Basic Auth Configuration</title>
+    <link>http://localhost:1313/2025-03-11-squid-proxy-basic-auth-configuration/</link>
+    <pubDate>Mon, 10 Mar 2025 20:43:37 &#43;0100</pubDate>
+    <author>xxxx</author>
+    <guid>http://localhost:1313/2025-03-11-squid-proxy-basic-auth-configuration/</guid>
+    <description><![CDATA[<p>This is the how-to I would have loved to have found when I was setting up Squid proxy for a production application.</p>
+<h1 id="adding-auth-to-existing-squid-proxy-configuration">Adding auth to existing Squid proxy configuration</h1>
+<h2 id="create-the-htpasswd-file">Create the htpasswd file</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">htpasswd -c /etc/squid/passwd username  # will prompt for a password
+</span></span><span class="line"><span class="cl">chmod 644 /etc/squid/passwd # This step is important, otherwise Squid will not read the authentication file
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="verify-the-authentication">Verify the authentication</h2>
+<p>Run the following command to verify the authentication against squid&rsquo;s basic_ncsa_auth tool:</p>]]></description>
+</item>
+</channel>
+</rss>

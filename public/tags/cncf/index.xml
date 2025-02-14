@@ -1,24 +1,5 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Cncf - Tag - cuffaro.com</title>
-        <link>http://localhost:1313/tags/cncf/</link>
-        <description>Cncf - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 20 Mar 2022 08:42:47 &#43;0200</lastBuildDate><atom:link href="http://localhost:1313/tags/cncf/" rel="self" type="application/rss+xml" /><item>
-    <title>My experience passing Certified Kubernetes Security Specialist (CKS) exam</title>
-    <link>http://localhost:1313/2022-03-20-cks-experience/</link>
-    <pubDate>Sun, 20 Mar 2022 08:42:47 &#43;0200</pubDate>
-    <author>xxxx</author>
-    <guid>http://localhost:1313/2022-03-20-cks-experience/</guid>
-    <description><![CDATA[<p>Earlier in 2021, right after taking the exams for CKA and CKAD in succession (the experience of which I documented <a href="https://cuffaro.com/blog/2021-01-24-cka-ckad/" target="_blank" rel="noopener noreffer ">here</a>), I quickly booked the brand-new (at least at the time) CKS exam. Life happened, and I&rsquo;ve ended up procrastinating the study and preparation process until now 😅.</p>
-<p>Today I got the great news of a PASS, and once again I would like to share my experience in obtaining this tough certification.</p>]]></description>
-</item>
-<item>
-    <title>My experience passing CKA and CKAD</title>
-    <link>http://localhost:1313/2021-01-24-cka-ckad/</link>
-    <pubDate>Sun, 24 Jan 2021 19:42:47 &#43;0200</pubDate>
-    <author>xxxx</author>
-    <guid>http://localhost:1313/2021-01-24-cka-ckad/</guid>
-    <description><![CDATA[<p>In December last year I was able to sit for the coveted Certified Kubernetes Administrator and Certified Kubernetes Application Developer exams, and clear them both after some preparation.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Cncf - Tag - cuffaro.com</title><link>https://cuffaro.com/tags/cncf/</link><description>Cncf - Tag - cuffaro.com</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 20 Mar 2022 08:42:47 +0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/cncf/" rel="self" type="application/rss+xml"/><item><title>My experience passing Certified Kubernetes Security Specialist (CKS) exam</title><link>https://cuffaro.com/2022-03-20-cks-experience/</link><pubDate>Sun, 20 Mar 2022 08:42:47 +0200</pubDate><author>xxxx</author><guid>https://cuffaro.com/2022-03-20-cks-experience/</guid><description><![CDATA[<p>Earlier in 2021, right after taking the exams for CKA and CKAD in succession (the experience of which I documented <a href="https://cuffaro.com/blog/2021-01-24-cka-ckad/" target="_blank" rel="noopener noreffer ">here</a>), I quickly booked the brand-new (at least at the time) CKS exam. Life happened, and I&rsquo;ve ended up procrastinating the study and preparation process until now 😅.</p>
+<p>Today I got the great news of a PASS, and once again I would like to share my experience in obtaining this tough certification.</p>]]></description></item><item><title>My experience passing CKA and CKAD</title><link>https://cuffaro.com/2021-01-24-cka-ckad/</link><pubDate>Sun, 24 Jan 2021 19:42:47 +0200</pubDate><author>xxxx</author><guid>https://cuffaro.com/2021-01-24-cka-ckad/</guid><description><![CDATA[<p>In December last year I was able to sit for the coveted Certified Kubernetes Administrator and Certified Kubernetes Application Developer exams, and clear them both after some preparation.</p>
 <p>This post is meant to share my exam experience, and all the materials used.</p>
 <h3 id="tldr">TL;DR</h3>
 <ul>
@@ -30,7 +11,4 @@
 <li>Practice, practice and practice more.</li>
 </ul>
 <h3 id="the-exams">The exams</h3>
-<p>The exam for any of these Kubernetes certifications consists in solving a set of tasks, in a 2 hour terminal session.</p>]]></description>
-</item>
-</channel>
-</rss>
+<p>The exam for any of these Kubernetes certifications consists in solving a set of tasks, in a 2 hour terminal session.</p>]]></description></item></channel></rss>

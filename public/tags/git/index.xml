@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Git - Tag - cuffaro.com</title>
+        <link>https://cuffaro.com/tags/git/</link>
+        <description>Git - Tag - cuffaro.com</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 14 Feb 2025 08:00:00 &#43;0100</lastBuildDate><atom:link href="https://cuffaro.com/tags/git/" rel="self" type="application/rss+xml" /><item>
+    <title>Using Jujutsu in a colocated git repository</title>
+    <link>https://cuffaro.com/2025-02-14-using-jujutsu/</link>
+    <pubDate>Fri, 14 Feb 2025 08:00:00 &#43;0100</pubDate>
+    <author>xxxx</author>
+    <guid>https://cuffaro.com/2025-02-14-using-jujutsu/</guid>
+    <description><![CDATA[<p>Jujutsu (jj) is a Git-compatible version control system that offers a different approach to managing your code history.
+I have spent a few weeks using Jujutsu (or <code>jj</code>) daily on personal and work git repositories.
+One of the advantages of Jujutsu is that you can use it locally alongside your team without them being aware that you&rsquo;re managing your code history differently.</p>
+<p>Really Jujutsu is a frontend for git, using git as its backend.
+So we are still based on a commit history, but the way we evolve our commit is different.</p>]]></description>
+</item>
+</channel>
+</rss>
