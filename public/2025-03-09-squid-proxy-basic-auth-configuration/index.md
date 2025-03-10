@@ -1,11 +1,5 @@
----
-title: "Squid Proxy Basic Auth Configuration"
-date: 2025-03-10T10:00:00+01:00
-description: "How to configure Squid proxy with basic authentication"
-tags: ["howto", "squid", "proxy", "auth"]
-categories: ["System Administration"]
-draft: false
----
+# Squid Proxy Basic Auth Configuration
+
 
 This quick and straightforward how-to is the one I would have loved to have found while I was setting up [Squid proxy](https://www.squid-cache.org/) for a production application.
 
@@ -99,3 +93,4 @@ If you get `TCP_DENIED/40*` in the logs, it means something is wrong with the au
 1741608951.396      3 10.135.50.230 TCP_DENIED/407 4016 CONNECT example.com:443 username HIER_NONE/- text/html
 ```
 In this case, the request was denied because the user was not authenticated to the proxy.
+

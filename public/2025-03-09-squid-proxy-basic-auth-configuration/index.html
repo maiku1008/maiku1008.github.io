@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Squid Proxy Basic Auth Configuration - cuffaro.com</title><meta name="Description" content="How to configure Squid proxy with basic authentication"><meta property="og:url" content="https://cuffaro.com/2025-03-09-squid-proxy-basic-auth-configuration/">
+  <meta property="og:site_name" content="cuffaro.com">
+  <meta property="og:title" content="Squid Proxy Basic Auth Configuration">
+  <meta property="og:description" content="How to configure Squid proxy with basic authentication">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-09T10:00:00+01:00">
+    <meta property="article:modified_time" content="2025-03-09T10:00:00+01:00">
+    <meta property="article:tag" content="Howto">
+    <meta property="article:tag" content="Squid">
+    <meta property="article:tag" content="Proxy">
+    <meta property="article:tag" content="Auth">
+    <meta property="og:image" content="https://cuffaro.com/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cuffaro.com/logo.png">
+  <meta name="twitter:title" content="Squid Proxy Basic Auth Configuration">
+  <meta name="twitter:description" content="How to configure Squid proxy with basic authentication">
+      <meta name="twitter:site" content="@maiku1008">
+<meta name="application-name" content="cuffaro.com">
+<meta name="apple-mobile-web-app-title" content="cuffaro.com"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://cuffaro.com/2025-03-09-squid-proxy-basic-auth-configuration/" /><link rel="prev" href="https://cuffaro.com/2023-03-26-am-i-a-senior-engineer-yet/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Squid Proxy Basic Auth Configuration",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/cuffaro.com\/2025-03-09-squid-proxy-basic-auth-configuration\/"
+        },"genre": "posts","keywords": "howto, squid, proxy, auth","wordcount":  442 ,
+        "url": "https:\/\/cuffaro.com\/2025-03-09-squid-proxy-basic-auth-configuration\/","datePublished": "2025-03-09T10:00:00+01:00","dateModified": "2025-03-09T10:00:00+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": "How to configure Squid proxy with basic authentication"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cuffaro.com">cuffaro.com</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cuffaro.com">cuffaro.com</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Squid Proxy Basic Auth Configuration</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span>&nbsp;<span class="post-category">included in <a href="/categories/system-administration/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>System Administration</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-09">2025-03-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;442 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#create-the-htpasswd-file">Create the htpasswd file</a></li>
+    <li><a href="#make-sure-squid-can-read-the-htpasswd-file">Make sure Squid can read the htpasswd file</a></li>
+    <li><a href="#verify-the-authentication">Verify the authentication</a></li>
+    <li><a href="#squid-configuration">Squid configuration</a></li>
+    <li><a href="#check-if-it-actually-works">Check if it actually works</a></li>
+    <li><a href="#check-the-logs">Check the logs</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>This quick and straightforward how-to is the one I would have loved to have found while I was setting up <a href="https://www.squid-cache.org/" target="_blank" rel="noopener noreffer ">Squid proxy</a> for a production application.</p>
+<p>Squid is a caching proxy for the Web supporting HTTP, HTTPS, FTP, and more. It reduces bandwidth and improves response times by caching and reusing frequently-requested web pages.</p>
+<p>I wanted to restrict access to the proxy to only authenticated users.
+Here&rsquo;s how I did it.</p>
+<h2 id="create-the-htpasswd-file">Create the htpasswd file</h2>
+<p>The first step is to create the htpasswd file.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">htpasswd -c /etc/squid/passwd username
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This will prompt for a password.</p>
+<h2 id="make-sure-squid-can-read-the-htpasswd-file">Make sure Squid can read the htpasswd file</h2>
+<p>Without this, Squid will not be able to read the file and fail silently when trying to authenticate.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod <span class="m">644</span> /etc/squid/passwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="verify-the-authentication">Verify the authentication</h2>
+<p>Run the following command to verify the authentication against squid&rsquo;s basic_ncsa_auth tool:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;username password&#34;</span> <span class="p">|</span> /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="squid-configuration">Squid configuration</h2>
+<p>Add the following to your Squid configuration file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># /etc/squid/squid.conf</span>
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="c1"># Authentication settings</span>
+</span></span><span class="line"><span class="cl">auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
+</span></span><span class="line"><span class="cl">auth_param basic realm proxy
+</span></span><span class="line"><span class="cl">auth_param basic credentialsttl <span class="m">2</span> hours
+</span></span><span class="line"><span class="cl">auth_param basic casesensitive off
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Define ACL for authenticated users</span>
+</span></span><span class="line"><span class="cl">acl authenticated_users proxy_auth REQUIRED
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Allow authenticated users to access the web</span>
+</span></span><span class="line"><span class="cl">http_access allow authenticated_users
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># And finally deny all other access to this proxy</span>
+</span></span><span class="line"><span class="cl">http_access deny all
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ensure that <code>http_access allow authenticated_users</code> is the last allow rule in the file.</p>
+<p>Verify the squid configuration is correct with:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">squid -k parse
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And restart Squid:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl restart squid
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="check-if-it-actually-works">Check if it actually works</h2>
+<p>From your local machine (meaning not the machine that is running the Squid proxy), try to access a website through the proxy with authentication:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -x http://username:password@squid-proxy-host:3128 http://example.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Make sure you try to use the proxy without authentication as well, to make sure we get an access denied error.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -x http://squid-proxy-host:3128 http://example.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="check-the-logs">Check the logs</h2>
+<p>Use the following command to check the logs:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tail -f /var/log/squid/access.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You should see logs like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">1741610861.934  <span class="m">25047</span> 10.135.50.227 TCP_TUNNEL/200 <span class="m">21623</span> CONNECT example.com:443 username HIER_DIRECT/5.226.179.10 -
+</span></span><span class="line"><span class="cl">1741610861.937  <span class="m">22061</span> 10.135.50.227 TCP_TUNNEL/200 <span class="m">21530</span> CONNECT example.com:443 username HIER_DIRECT/5.226.179.10 -
+</span></span><span class="line"><span class="cl">1741610861.939   <span class="m">6654</span> 10.135.50.227 TCP_TUNNEL/200 <span class="m">22589</span> CONNECT example.com:443 username HIER_DIRECT/5.226.179.10 -
+</span></span><span class="line"><span class="cl">1741610861.940  <span class="m">60714</span> 10.135.50.224 TCP_TUNNEL/200 <span class="m">21579</span> CONNECT example.com:443 username HIER_DIRECT/5.226.179.10 -
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>TCP_TUNNEL/200</code> indicates the requests are redirected correctly.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>If you get <code>TCP_DENIED/40*</code> in the logs, it means something is wrong with the authentication mechanism, for example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1741608951.396      3 10.135.50.230 TCP_DENIED/407 4016 CONNECT example.com:443 username HIER_NONE/- text/html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In this case, the request was denied because the user was not authenticated to the proxy.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-03-09</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2025-03-09-squid-proxy-basic-auth-configuration/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://cuffaro.com/2025-03-09-squid-proxy-basic-auth-configuration/" data-title="Squid Proxy Basic Auth Configuration" data-via="maiku1008" data-hashtags="howto,squid,proxy,auth"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://cuffaro.com/2025-03-09-squid-proxy-basic-auth-configuration/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://cuffaro.com/2025-03-09-squid-proxy-basic-auth-configuration/" data-title="Squid Proxy Basic Auth Configuration"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/howto/">Howto</a>,&nbsp;<a href="/tags/squid/">Squid</a>,&nbsp;<a href="/tags/proxy/">Proxy</a>,&nbsp;<a href="/tags/auth/">Auth</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2023-03-26-am-i-a-senior-engineer-yet/" class="prev" rel="prev" title="I&#39;ve been programming full time for the past 5 years. Am I a senior engineer yet?"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>I've been programming full time for the past 5 years. Am I a senior engineer yet?</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2025</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="https://cuffaro-com.disqus.com/embed.js" defer></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-JQGY3PSRXT', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-JQGY3PSRXT" async></script></body>
+</html>

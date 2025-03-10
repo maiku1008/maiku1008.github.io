@@ -2,16 +2,16 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://cuffaro.com/tags/auth/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/categories/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/tags/howto/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/posts/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/tags/proxy/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/tags/squid/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/2025-03-11-squid-proxy-basic-auth-configuration/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/categories/system-administration/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://cuffaro.com/tags/</loc><lastmod>2025-03-10T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/tags/auth/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/categories/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/tags/howto/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/posts/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/tags/proxy/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/tags/squid/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/2025-03-09-squid-proxy-basic-auth-configuration/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/categories/system-administration/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://cuffaro.com/tags/</loc><lastmod>2025-03-09T10:00:00&#43;01:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://cuffaro.com/tags/career/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://cuffaro.com/tags/dev/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://cuffaro.com/tags/development/</loc><lastmod>2023-03-26T08:00:41&#43;02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
