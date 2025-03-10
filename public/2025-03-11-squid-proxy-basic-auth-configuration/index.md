@@ -10,26 +10,26 @@ Here's how I did it.
 
 ## Create the htpasswd file
 The first step is to create the htpasswd file.
-```
+```bash
 htpasswd -c /etc/squid/passwd username
 ```
 This will prompt for a password.
 
 ## Make sure Squid can read the htpasswd file
 Without this, Squid will not be able to read the file and fail silently when trying to authenticate.
-```
+```bash
 chmod 644 /etc/squid/passwd
 ```
 
 ## Verify the authentication
 Run the following command to verify the authentication against squid's basic_ncsa_auth tool:
-```
+```bash
 echo "username password" | /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
 ```
 
 ## Squid configuration
 Add the following to your Squid configuration file:
-```
+```bash
 # /etc/squid/squid.conf
 ...
 # Authentication settings
@@ -51,33 +51,33 @@ http_access deny all
 Ensure that `http_access allow authenticated_users` is the last allow rule in the file.
 
 Verify the squid configuration is correct with:
-```
+```bash
 squid -k parse
 ```
 
 And restart Squid:
-```
+```bash
 systemctl restart squid
 ```
 
 ## Check if it actually works
 From your local machine (meaning not the machine that is running the Squid proxy), try to access a website through the proxy with authentication:
-```
+```bash
 curl -x http://username:password@squid-proxy-host:3128 http://example.com
 ```
 
 Make sure you try to use the proxy without authentication as well, to make sure we get an access denied error.
-```
+```bash
 curl -x http://squid-proxy-host:3128 http://example.com
 ```
 
 ## Check the logs
 Use the following command to check the logs:
-```
+```bash
 tail -f /var/log/squid/access.log
 ```
 You should see logs like this: 
-```
+```bash
 1741610861.934  25047 10.135.50.227 TCP_TUNNEL/200 21623 CONNECT example.com:443 username HIER_DIRECT/5.226.179.10 -
 1741610861.937  22061 10.135.50.227 TCP_TUNNEL/200 21530 CONNECT example.com:443 username HIER_DIRECT/5.226.179.10 -
 1741610861.939   6654 10.135.50.227 TCP_TUNNEL/200 22589 CONNECT example.com:443 username HIER_DIRECT/5.226.179.10 -

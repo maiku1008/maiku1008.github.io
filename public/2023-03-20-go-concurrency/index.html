@@ -1,339 +1,588 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Speeding up a Go cli application with concurrency - cuffaro.com</title><meta name=Description content="cuffaro.com"><meta property="og:url" content="https://cuffaro.com/2023-03-20-go-concurrency/">
-<meta property="og:site_name" content="cuffaro.com"><meta property="og:title" content="Speeding up a Go cli application with concurrency"><meta property="og:description" content="Premise A few months ago I worked with a company which provided fully functional backend for online multiplayer games. As part of their product portfolio, they provided their customers with a cli utility, called ds-uploader (dedicated server uploader).
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Speeding up a Go cli application with concurrency - cuffaro.com</title><meta name="Description" content="cuffaro.com"><meta property="og:url" content="https://cuffaro.com/2023-03-20-go-concurrency/">
+  <meta property="og:site_name" content="cuffaro.com">
+  <meta property="og:title" content="Speeding up a Go cli application with concurrency">
+  <meta property="og:description" content="Premise A few months ago I worked with a company which provided fully functional backend for online multiplayer games. As part of their product portfolio, they provided their customers with a cli utility, called ds-uploader (dedicated server uploader).
 Written in Go, this CLI helped the customer:
-Process all files and assets in a directory of their choice containing their game server. Synchronize each file to a remote object storage bucket (meaning to upload only files that are new or modified). From those uploaded files, build a container image. Pass that container image to another service, which would then be responsible to run it. Most of the implementation details involved calling different services, both belonging to the service provider, and to the cloud provider of choice (in this case, AWS)."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-03-20T08:00:47+02:00"><meta property="article:modified_time" content="2023-03-20T08:00:47+02:00"><meta property="article:tag" content="Go"><meta property="og:image" content="https://cuffaro.com/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://cuffaro.com/logo.png"><meta name=twitter:title content="Speeding up a Go cli application with concurrency"><meta name=twitter:description content="Premise A few months ago I worked with a company which provided fully functional backend for online multiplayer games. As part of their product portfolio, they provided their customers with a cli utility, called ds-uploader (dedicated server uploader).
+Process all files and assets in a directory of their choice containing their game server. Synchronize each file to a remote object storage bucket (meaning to upload only files that are new or modified). From those uploaded files, build a container image. Pass that container image to another service, which would then be responsible to run it. Most of the implementation details involved calling different services, both belonging to the service provider, and to the cloud provider of choice (in this case, AWS).">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-03-20T08:00:47+02:00">
+    <meta property="article:modified_time" content="2023-03-20T08:00:47+02:00">
+    <meta property="article:tag" content="Go">
+    <meta property="og:image" content="https://cuffaro.com/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cuffaro.com/logo.png">
+  <meta name="twitter:title" content="Speeding up a Go cli application with concurrency">
+  <meta name="twitter:description" content="Premise A few months ago I worked with a company which provided fully functional backend for online multiplayer games. As part of their product portfolio, they provided their customers with a cli utility, called ds-uploader (dedicated server uploader).
 Written in Go, this CLI helped the customer:
-Process all files and assets in a directory of their choice containing their game server. Synchronize each file to a remote object storage bucket (meaning to upload only files that are new or modified). From those uploaded files, build a container image. Pass that container image to another service, which would then be responsible to run it. Most of the implementation details involved calling different services, both belonging to the service provider, and to the cloud provider of choice (in this case, AWS)."><meta name=twitter:site content="@maiku1008"><meta name=application-name content="cuffaro.com"><meta name=apple-mobile-web-app-title content="cuffaro.com"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://cuffaro.com/2023-03-20-go-concurrency/><link rel=prev href=https://cuffaro.com/2022-03-20-cks-experience/><link rel=next href=https://cuffaro.com/2023-03-26-am-i-a-senior-engineer-yet/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Speeding up a Go cli application with concurrency","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/cuffaro.com\/2023-03-20-go-concurrency\/"},"genre":"posts","keywords":"go","wordcount":1404,"url":"https:\/\/cuffaro.com\/2023-03-20-go-concurrency\/","datePublished":"2023-03-20T08:00:47+02:00","dateModified":"2023-03-20T08:00:47+02:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"xxxx"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"dark"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"dark"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=cuffaro.com>cuffaro.com</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
-<input type=text placeholder="Search titles or contents..." id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i>
-</span></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=cuffaro.com>cuffaro.com</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="Search titles or contents..." id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search><i class="fas fa-search fa-fw" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>Cancel</a></div><a class=menu-item href=/posts/ title>Posts</a><a class=menu-item href=/tags/ title>Tags</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
-<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Speeding up a Go cli application with concurrency</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>xxxx</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2023-03-20>2023-03-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;1404 words&nbsp;
-<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;7 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept=true><div class="details-summary toc-title"><span>Contents</span>
-<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#premise>Premise</a></li><li><a href=#the-problem>The Problem</a></li><li><a href=#show-me-the-code>Show me the code!</a><ul><li><a href=#before>Before</a></li><li><a href=#after>After</a></li></ul></li><li><a href=#conclusion>Conclusion</a></li></ul></nav></div></div><div class=content id=content><h2 id=premise>Premise</h2><p>A few months ago I worked with a company which provided fully functional backend for online multiplayer games.
-As part of their product portfolio, they provided their customers with a cli utility, called <code>ds-uploader</code> (dedicated server uploader).</p><p>Written in Go, this CLI helped the customer:</p><ul><li>Process all files and assets in a directory of their choice containing their game server.</li><li>Synchronize each file to a remote object storage bucket (meaning to upload only files that are new or modified).</li><li>From those uploaded files, build a container image.</li><li>Pass that container image to another service, which would then be responsible to run it.</li></ul><p>Most of the implementation details involved calling different services, both belonging to the service provider, and to the cloud provider of choice (in this case, AWS).</p><p>These details were mostly hidden from the end user; in fact all they really needed to worry about, was to run the application and point it to the directory with their game server files, along with a few other options.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ ds-uploader sync --path /path/to/game/server/ ... &lt;more flags here&gt;
-</span></span></code></pre></td></tr></table></div></div><h2 id=the-problem>The Problem</h2><p>The client mentioned that in some cases, the ds-uploader would take a long time to run end to end.
-In particular, the part of the application dealing with the file uploads would take a very long time, whether the files were new or to be modified.</p><p>Upon testing, we found that this mostly happened with game server directories with multiple thousands of files, distributed across multiple levels of nested directories.</p><p>In the client&rsquo;s case, where they had a game server directory of more than 2000 files, nested across at least 5 levels of directories, for a total of around 4GB, the <code>ds-uploader</code> would spend more than <em>6 hours</em> to complete.</p><h2 id=show-me-the-code>Show me the code!</h2><h3 id=before>Before</h3><p>In the application, we used an interface exposed by the cloud provider&rsquo;s API.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// BatchUploadIterator is an interface that uses the scanner pattern to
-</span></span></span><span class=line><span class=cl><span class=c1>// iterate through what needs to be uploaded.
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>BatchUploadIterator</span> <span class=kd>interface</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nf>Next</span><span class=p>()</span> <span class=kt>bool</span>
-</span></span><span class=line><span class=cl>	<span class=nf>Err</span><span class=p>()</span> <span class=kt>error</span>
-</span></span><span class=line><span class=cl>	<span class=nf>UploadObject</span><span class=p>()</span> <span class=nx>BatchUploadObject</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>By creating a custom type satisfying such an interface, we could basically let the cloud provider&rsquo;s API do all the heavy lifting for us, by leveraging an <code>Uploader</code> type providing an <code>UploadWithIterator</code> method.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Uploader</span> <span class=kd>struct</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=c1>// A few exported fields
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>u</span> <span class=nx>Uploader</span><span class=p>)</span> <span class=nf>UploadWithIterator</span><span class=p>(</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ctx</span> <span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>iter</span> <span class=nx>BatchUploadIterator</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>opts</span> <span class=o>...</span><span class=kd>func</span><span class=p>(</span><span class=o>*</span><span class=nx>Uploader</span><span class=p>))</span> <span class=kt>error</span> <span class=p>{}</span>
-</span></span></code></pre></td></tr></table></div></div><p>So we decided to do exactly that and wrote our own <code>BatchUploadIterator</code>, which roughly looks like this.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Custom FileIterator
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>FileIterator</span> <span class=kd>struct</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>BucketName</span> <span class=kt>string</span>
-</span></span><span class=line><span class=cl>	<span class=nx>FileInfos</span>  <span class=p>[]</span><span class=nx>FileInfo</span>
-</span></span><span class=line><span class=cl>	<span class=nx>err</span>        <span class=kt>error</span>
-</span></span><span class=line><span class=cl>	<span class=nx>Size</span>       <span class=kt>int64</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>NewFileIterator</span><span class=p>(</span><span class=nx>directoryPath</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>auth</span> <span class=o>*</span><span class=nx>session</span><span class=p>.</span><span class=nx>Session</span><span class=p>)</span> <span class=o>*</span><span class=nx>FileIterator</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=c1>// Traverse the entire directory structure
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// and save metadata from each file if it is not a directory.
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>iterator</span> <span class=o>*</span><span class=nx>FileIterator</span><span class=p>)</span> <span class=nf>Next</span><span class=p>()</span> <span class=kt>bool</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=c1>// return whether or not we are at the end of the list of files to upload.
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>iterator</span> <span class=o>*</span><span class=nx>FileIterator</span><span class=p>)</span> <span class=nf>Err</span><span class=p>()</span> <span class=kt>error</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=c1>// return any error
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>iterator</span> <span class=o>*</span><span class=nx>FileIterator</span><span class=p>)</span> <span class=nf>UploadObject</span><span class=p>()</span> <span class=nx>BatchUploadObject</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=c1>// return a single UploadObject representing the file we want to upload
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>Next we passed this iterator to AWS API&rsquo;s <code>UploadWithIterator</code>, and called it a day.</p><p>With smaller directories, this worked without issues, and upload times were acceptable.</p><p>With larger, nested directories we started seeing slower speeds.</p><p>This is what <code>UploadWithIterator</code> looks like:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>u</span> <span class=nx>Uploader</span><span class=p>)</span> <span class=nf>UploadWithIterator</span><span class=p>(</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ctx</span> <span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>iter</span> <span class=nx>BatchUploadIterator</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>opts</span> <span class=o>...</span><span class=kd>func</span><span class=p>(</span><span class=o>*</span><span class=nx>Uploader</span><span class=p>))</span> <span class=kt>error</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	
-</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>errs</span> <span class=p>[]</span><span class=nx>Error</span>
-</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>iter</span><span class=p>.</span><span class=nf>Next</span><span class=p>()</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=c1>// Get the object from our custom iterator
-</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>object</span> <span class=o>:=</span> <span class=nx>iter</span><span class=p>.</span><span class=nf>UploadObject</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>		<span class=c1>// Attempt to upload the object
-</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>u</span><span class=p>.</span><span class=nf>UploadWithContext</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span> <span class=nx>object</span><span class=p>.</span><span class=nx>Object</span><span class=p>,</span> <span class=nx>opts</span><span class=o>...</span><span class=p>);</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>			<span class=nx>errs</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>errs</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>		<span class=p>}</span>
-</span></span><span class=line><span class=cl>		<span class=c1>// omitted code
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>errs</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=c1>// handle the errors
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>nil</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>As we can see, the method iterates through the list of objects <em>sequentially</em>, and calls <code>u.UploadWithContext</code> for each, which is where the upload happens under the hood.</p><p>The problem is that with this approach, the program actually waits until a file has been uploaded with success or not, before moving on to the next.</p><h3 id=after>After</h3><p>This problem is a great candidate for solving with Go&rsquo;s concurrency features.</p><p>We have some I/O operation, on different objects which are not dependant on each other, that can be uploaded in no particular order.</p><p>We know from the API documentation that <code>UploadWithContext</code> is safe to be called across multiple goroutines.</p><p>The API doesn&rsquo;t natively provide methods for concurrent uploads, so we decided to extend the <code>Uploader</code> type with a custom type:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// ConcurrentUploader wraps an Uploader and extends its capabilities.
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>ConcurrentUploader</span> <span class=kd>struct</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=nx>uploader</span> <span class=nx>Uploader</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>NewConcurrentUploader</span><span class=p>(</span><span class=nx>uploader</span> <span class=nx>Uploader</span><span class=p>)</span> <span class=nx>ConcurrentUploader</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>ConcurrentUploader</span><span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=nx>uploader</span><span class=p>:</span> <span class=nx>uploader</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>Such a type will still call <code>Uploader.UploadWithContext</code>, but from our own version of <code>UploadWithIterator</code>, which we also rename for good measure.</p><p>Here it is, with comments at each step to help understand what it does</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span><span class=lnt>40
-</span><span class=lnt>41
-</span><span class=lnt>42
-</span><span class=lnt>43
-</span><span class=lnt>44
-</span><span class=lnt>45
-</span><span class=lnt>46
-</span><span class=lnt>47
-</span><span class=lnt>48
-</span><span class=lnt>49
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>cu</span> <span class=nx>ConcurrentUploader</span><span class=p>)</span> <span class=nf>UploadConcurrentlyWithIterator</span><span class=p>(</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ctx</span> <span class=nx>aws</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>iter</span> <span class=nx>s3manager</span><span class=p>.</span><span class=nx>BatchUploadIterator</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>errs</span> <span class=p>[]</span><span class=kt>error</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>	<span class=c1>// We use a waitgroup because we plan to have several goroutines, the number of which
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// is determined by the concurrency value, uploading the processed objects in batches
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>var</span> <span class=nx>wg</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span>
-</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>concurrency</span> <span class=p>=</span> <span class=mi>10</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=nx>objects</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>BatchUploadObject</span><span class=p>,</span> <span class=nx>concurrency</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=nx>errors</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>error</span><span class=p>,</span> <span class=nx>concurrency</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=c1>// Spawn a number of concurrent upload workers equal to the concurrency value.
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>w</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>w</span> <span class=p>&lt;</span> <span class=nx>concurrency</span><span class=p>;</span> <span class=nx>w</span><span class=o>++</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=nx>cu</span><span class=p>.</span><span class=nf>uploadWorker</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>wg</span><span class=p>,</span> <span class=nx>objects</span><span class=p>,</span> <span class=nx>errors</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>		<span class=nx>wg</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=c1>// In a separate goroutine, start iterating through the FileIterator.
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// This contains metadata of all dedicated server files, and is responsible for
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// creating an Upload Object for the API to consume.
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// Send all found upload objects to the objects channel.
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// When we&#39;re done, meaning we sent all the objects, we close the channel.
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>iter</span><span class=p>.</span><span class=nf>Next</span><span class=p>()</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>			<span class=nx>object</span> <span class=o>:=</span> <span class=nx>iter</span><span class=p>.</span><span class=nf>UploadObject</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>			<span class=nx>objects</span> <span class=o>&lt;-</span> <span class=nx>object</span>
-</span></span><span class=line><span class=cl>		<span class=p>}</span>
-</span></span><span class=line><span class=cl>		<span class=nb>close</span><span class=p>(</span><span class=nx>objects</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=p>}()</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=c1>// In a separate goroutine, gather all errors from the errors channel
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>err</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>errors</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>			<span class=nx>errs</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>errs</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>		<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=p>}()</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=c1>// Wait for all the uploadWorkers to be done working, 
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// and then close the errors channel.
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>wg</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>	<span class=nb>close</span><span class=p>(</span><span class=nx>errors</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>errs</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=c1>// handle the errors
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>nil</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>Lastly, we have the <code>uploadWorker</code> that looks like this:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
-</span><span class=lnt>36
-</span><span class=lnt>37
-</span><span class=lnt>38
-</span><span class=lnt>39
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// uploadWorker takes care to process each object and errors if any.
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>cu</span> <span class=nx>ConcurrentUploader</span><span class=p>)</span> <span class=nf>uploadWorker</span><span class=p>(</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ctx</span> <span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>wg</span> <span class=o>*</span><span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>objects</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=nx>BatchUploadObject</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>errors</span> <span class=kd>chan</span><span class=o>&lt;-</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>	<span class=c1>// receive objects from the objects channel
-</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>o</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>objects</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=c1>// upload the object (see below)
-</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>err</span> <span class=o>:=</span> <span class=nx>cu</span><span class=p>.</span><span class=nf>uploadObject</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span> <span class=nx>o</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>			<span class=nx>errors</span> <span class=o>&lt;-</span> <span class=nx>err</span>
-</span></span><span class=line><span class=cl>		<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1>// uploadObject simply calls the Uploader&#39;s UploadWithContext.
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>cu</span> <span class=nx>ConcurrentUploader</span><span class=p>)</span> <span class=nf>uploadObject</span><span class=p>(</span>
-</span></span><span class=line><span class=cl>	<span class=nx>ctx</span> <span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>	<span class=nx>object</span> <span class=nx>BatchUploadObject</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=nx>err</span> <span class=o>:=</span> <span class=nx>cu</span><span class=p>.</span><span class=nx>uploader</span><span class=p>.</span><span class=nf>UploadWithContext</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span> <span class=nx>object</span><span class=p>.</span><span class=nx>Object</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>err</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>object</span><span class=p>.</span><span class=nx>After</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=kc>nil</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=nx>err</span> <span class=p>=</span> <span class=nx>object</span><span class=p>.</span><span class=nf>After</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>err</span>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>nil</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=conclusion>Conclusion</h2><ul><li>We kept using our custom <code>FileIterator</code> and the API&rsquo;s <code>UploadWithContext</code> method. This allowed us to use what was already there and not refactor too much.</li><li>We however did so while applying a relatively basic concurrency pattern based on a worker pool and waitgroup.</li><li>Workers run concurrently, and process the objects (files) to upload in batches</li></ul><p>As a result, the upload of the client&rsquo;s game server (which I repeat, was a nested directory of more than 2000 files, for a total of around 4GB ) went from <em>6 hours</em> to a much better <em>30 minutes</em> end to end.</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2023-03-20</span></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=/2023-03-20-go-concurrency/index.md target=_blank>Read Markdown</a></span></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://cuffaro.com/2023-03-20-go-concurrency/ data-title="Speeding up a Go cli application with concurrency" data-via=maiku1008 data-hashtags=go><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Linkedin" data-sharer=linkedin data-url=https://cuffaro.com/2023-03-20-go-concurrency/><i class="fab fa-linkedin fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://cuffaro.com/2023-03-20-go-concurrency/ data-title="Speeding up a Go cli application with concurrency"><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/go/>Go</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/2022-03-20-cks-experience/ class=prev rel=prev title="My experience passing Certified Kubernetes Security Specialist (CKS) exam"><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>My experience passing Certified Kubernetes Security Specialist (CKS) exam</a>
-<a href=/2023-03-26-am-i-a-senior-engineer-yet/ class=next rel=next title="I've been programming full time for the past 5 years. Am I a senior engineer yet?">I've been programming full time for the past 5 years. Am I a senior engineer yet?<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=disqus_thread class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://disqus.com/?ref_noscript>Disqus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2018 - 2025</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
-</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=https://cuffaro-com.disqus.com/embed.js defer></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/cookieconsent/cookieconsent.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-JQGY3PSRXT",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-JQGY3PSRXT" async></script></body></html>
+Process all files and assets in a directory of their choice containing their game server. Synchronize each file to a remote object storage bucket (meaning to upload only files that are new or modified). From those uploaded files, build a container image. Pass that container image to another service, which would then be responsible to run it. Most of the implementation details involved calling different services, both belonging to the service provider, and to the cloud provider of choice (in this case, AWS).">
+      <meta name="twitter:site" content="@maiku1008">
+<meta name="application-name" content="cuffaro.com">
+<meta name="apple-mobile-web-app-title" content="cuffaro.com"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://cuffaro.com/2023-03-20-go-concurrency/" /><link rel="prev" href="https://cuffaro.com/2022-03-20-cks-experience/" /><link rel="next" href="https://cuffaro.com/2023-03-26-am-i-a-senior-engineer-yet/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Speeding up a Go cli application with concurrency",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/cuffaro.com\/2023-03-20-go-concurrency\/"
+        },"genre": "posts","keywords": "go","wordcount":  1404 ,
+        "url": "https:\/\/cuffaro.com\/2023-03-20-go-concurrency\/","datePublished": "2023-03-20T08:00:47+02:00","dateModified": "2023-03-20T08:00:47+02:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cuffaro.com">cuffaro.com</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cuffaro.com">cuffaro.com</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Speeding up a Go cli application with concurrency</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-03-20">2023-03-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1404 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#premise">Premise</a></li>
+    <li><a href="#the-problem">The Problem</a></li>
+    <li><a href="#show-me-the-code">Show me the code!</a>
+      <ul>
+        <li><a href="#before">Before</a></li>
+        <li><a href="#after">After</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="premise">Premise</h2>
+<p>A few months ago I worked with a company which provided fully functional backend for online multiplayer games.
+As part of their product portfolio, they provided their customers with a cli utility, called <code>ds-uploader</code> (dedicated server uploader).</p>
+<p>Written in Go, this CLI helped the customer:</p>
+<ul>
+<li>Process all files and assets in a directory of their choice containing their game server.</li>
+<li>Synchronize each file to a remote object storage bucket (meaning to upload only files that are new or modified).</li>
+<li>From those uploaded files, build a container image.</li>
+<li>Pass that container image to another service, which would then be responsible to run it.</li>
+</ul>
+<p>Most of the implementation details involved calling different services, both belonging to the service provider, and to the cloud provider of choice (in this case, AWS).</p>
+<p>These details were mostly hidden from the end user; in fact all they really needed to worry about, was to run the application and point it to the directory with their game server files, along with a few other options.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ds-uploader sync --path /path/to/game/server/ ... &lt;more flags here&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="the-problem">The Problem</h2>
+<p>The client mentioned that in some cases, the ds-uploader would take a long time to run end to end.
+In particular, the part of the application dealing with the file uploads would take a very long time, whether the files were new or to be modified.</p>
+<p>Upon testing, we found that this mostly happened with game server directories with multiple thousands of files, distributed across multiple levels of nested directories.</p>
+<p>In the client&rsquo;s case, where they had a game server directory of more than 2000 files, nested across at least 5 levels of directories, for a total of around 4GB, the <code>ds-uploader</code> would spend more than <em>6 hours</em> to complete.</p>
+<h2 id="show-me-the-code">Show me the code!</h2>
+<h3 id="before">Before</h3>
+<p>In the application, we used an interface exposed by the cloud provider&rsquo;s API.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// BatchUploadIterator is an interface that uses the scanner pattern to
+</span></span></span><span class="line"><span class="cl"><span class="c1">// iterate through what needs to be uploaded.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">BatchUploadIterator</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">Next</span><span class="p">()</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">Err</span><span class="p">()</span> <span class="kt">error</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">UploadObject</span><span class="p">()</span> <span class="nx">BatchUploadObject</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>By creating a custom type satisfying such an interface, we could basically let the cloud provider&rsquo;s API do all the heavy lifting for us, by leveraging an <code>Uploader</code> type providing an <code>UploadWithIterator</code> method.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Uploader</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// A few exported fields
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">u</span> <span class="nx">Uploader</span><span class="p">)</span> <span class="nf">UploadWithIterator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">iter</span> <span class="nx">BatchUploadIterator</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">opts</span> <span class="o">...</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Uploader</span><span class="p">))</span> <span class="kt">error</span> <span class="p">{}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>So we decided to do exactly that and wrote our own <code>BatchUploadIterator</code>, which roughly looks like this.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Custom FileIterator
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">FileIterator</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">BucketName</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">FileInfos</span>  <span class="p">[]</span><span class="nx">FileInfo</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span>        <span class="kt">error</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Size</span>       <span class="kt">int64</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewFileIterator</span><span class="p">(</span><span class="nx">directoryPath</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">auth</span> <span class="o">*</span><span class="nx">session</span><span class="p">.</span><span class="nx">Session</span><span class="p">)</span> <span class="o">*</span><span class="nx">FileIterator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Traverse the entire directory structure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// and save metadata from each file if it is not a directory.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">iterator</span> <span class="o">*</span><span class="nx">FileIterator</span><span class="p">)</span> <span class="nf">Next</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// return whether or not we are at the end of the list of files to upload.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">iterator</span> <span class="o">*</span><span class="nx">FileIterator</span><span class="p">)</span> <span class="nf">Err</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// return any error
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">iterator</span> <span class="o">*</span><span class="nx">FileIterator</span><span class="p">)</span> <span class="nf">UploadObject</span><span class="p">()</span> <span class="nx">BatchUploadObject</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// return a single UploadObject representing the file we want to upload
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next we passed this iterator to AWS API&rsquo;s <code>UploadWithIterator</code>, and called it a day.</p>
+<p>With smaller directories, this worked without issues, and upload times were acceptable.</p>
+<p>With larger, nested directories we started seeing slower speeds.</p>
+<p>This is what <code>UploadWithIterator</code> looks like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">u</span> <span class="nx">Uploader</span><span class="p">)</span> <span class="nf">UploadWithIterator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">iter</span> <span class="nx">BatchUploadIterator</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">opts</span> <span class="o">...</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Uploader</span><span class="p">))</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">errs</span> <span class="p">[]</span><span class="nx">Error</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">iter</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// Get the object from our custom iterator
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">object</span> <span class="o">:=</span> <span class="nx">iter</span><span class="p">.</span><span class="nf">UploadObject</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// Attempt to upload the object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">u</span><span class="p">.</span><span class="nf">UploadWithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">object</span><span class="p">.</span><span class="nx">Object</span><span class="p">,</span> <span class="nx">opts</span><span class="o">...</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">errs</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">errs</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// omitted code
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">errs</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// handle the errors
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>As we can see, the method iterates through the list of objects <em>sequentially</em>, and calls <code>u.UploadWithContext</code> for each, which is where the upload happens under the hood.</p>
+<p>The problem is that with this approach, the program actually waits until a file has been uploaded with success or not, before moving on to the next.</p>
+<h3 id="after">After</h3>
+<p>This problem is a great candidate for solving with Go&rsquo;s concurrency features.</p>
+<p>We have some I/O operation, on different objects which are not dependant on each other, that can be uploaded in no particular order.</p>
+<p>We know from the API documentation that <code>UploadWithContext</code> is safe to be called across multiple goroutines.</p>
+<p>The API doesn&rsquo;t natively provide methods for concurrent uploads, so we decided to extend the <code>Uploader</code> type with a custom type:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// ConcurrentUploader wraps an Uploader and extends its capabilities.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">ConcurrentUploader</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">uploader</span> <span class="nx">Uploader</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewConcurrentUploader</span><span class="p">(</span><span class="nx">uploader</span> <span class="nx">Uploader</span><span class="p">)</span> <span class="nx">ConcurrentUploader</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">ConcurrentUploader</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">uploader</span><span class="p">:</span> <span class="nx">uploader</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Such a type will still call <code>Uploader.UploadWithContext</code>, but from our own version of <code>UploadWithIterator</code>, which we also rename for good measure.</p>
+<p>Here it is, with comments at each step to help understand what it does</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">cu</span> <span class="nx">ConcurrentUploader</span><span class="p">)</span> <span class="nf">UploadConcurrentlyWithIterator</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">aws</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">iter</span> <span class="nx">s3manager</span><span class="p">.</span><span class="nx">BatchUploadIterator</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">errs</span> <span class="p">[]</span><span class="kt">error</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">	<span class="c1">// We use a waitgroup because we plan to have several goroutines, the number of which
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// is determined by the concurrency value, uploading the processed objects in batches
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">concurrency</span> <span class="p">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">objects</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="nx">BatchUploadObject</span><span class="p">,</span> <span class="nx">concurrency</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">errors</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">error</span><span class="p">,</span> <span class="nx">concurrency</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Spawn a number of concurrent upload workers equal to the concurrency value.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">w</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">w</span> <span class="p">&lt;</span> <span class="nx">concurrency</span><span class="p">;</span> <span class="nx">w</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">go</span> <span class="nx">cu</span><span class="p">.</span><span class="nf">uploadWorker</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">wg</span><span class="p">,</span> <span class="nx">objects</span><span class="p">,</span> <span class="nx">errors</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// In a separate goroutine, start iterating through the FileIterator.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// This contains metadata of all dedicated server files, and is responsible for
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// creating an Upload Object for the API to consume.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// Send all found upload objects to the objects channel.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// When we&#39;re done, meaning we sent all the objects, we close the channel.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">iter</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">object</span> <span class="o">:=</span> <span class="nx">iter</span><span class="p">.</span><span class="nf">UploadObject</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">objects</span> <span class="o">&lt;-</span> <span class="nx">object</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">close</span><span class="p">(</span><span class="nx">objects</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// In a separate goroutine, gather all errors from the errors channel
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">err</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">errors</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">errs</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">errs</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Wait for all the uploadWorkers to be done working, 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// and then close the errors channel.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">close</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">errs</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// handle the errors
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Lastly, we have the <code>uploadWorker</code> that looks like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// uploadWorker takes care to process each object and errors if any.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">cu</span> <span class="nx">ConcurrentUploader</span><span class="p">)</span> <span class="nf">uploadWorker</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">wg</span> <span class="o">*</span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">objects</span> <span class="o">&lt;-</span><span class="kd">chan</span> <span class="nx">BatchUploadObject</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">errors</span> <span class="kd">chan</span><span class="o">&lt;-</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// receive objects from the objects channel
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">o</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">objects</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// upload the object (see below)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">err</span> <span class="o">:=</span> <span class="nx">cu</span><span class="p">.</span><span class="nf">uploadObject</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">o</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">errors</span> <span class="o">&lt;-</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// uploadObject simply calls the Uploader&#39;s UploadWithContext.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">cu</span> <span class="nx">ConcurrentUploader</span><span class="p">)</span> <span class="nf">uploadObject</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">object</span> <span class="nx">BatchUploadObject</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">cu</span><span class="p">.</span><span class="nx">uploader</span><span class="p">.</span><span class="nf">UploadWithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">object</span><span class="p">.</span><span class="nx">Object</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">object</span><span class="p">.</span><span class="nx">After</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="p">=</span> <span class="nx">object</span><span class="p">.</span><span class="nf">After</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="conclusion">Conclusion</h2>
+<ul>
+<li>We kept using our custom <code>FileIterator</code> and the API&rsquo;s <code>UploadWithContext</code> method. This allowed us to use what was already there and not refactor too much.</li>
+<li>We however did so while applying a relatively basic concurrency pattern based on a worker pool and waitgroup.</li>
+<li>Workers run concurrently, and process the objects (files) to upload in batches</li>
+</ul>
+<p>As a result, the upload of the client&rsquo;s game server (which I repeat, was a nested directory of more than 2000 files, for a total of around 4GB ) went from <em>6 hours</em> to a much better <em>30 minutes</em> end to end.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-03-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2023-03-20-go-concurrency/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://cuffaro.com/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency" data-via="maiku1008" data-hashtags="go"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://cuffaro.com/2023-03-20-go-concurrency/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://cuffaro.com/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2022-03-20-cks-experience/" class="prev" rel="prev" title="My experience passing Certified Kubernetes Security Specialist (CKS) exam"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>My experience passing Certified Kubernetes Security Specialist (CKS) exam</a>
+            <a href="/2023-03-26-am-i-a-senior-engineer-yet/" class="next" rel="next" title="I&#39;ve been programming full time for the past 5 years. Am I a senior engineer yet?">I've been programming full time for the past 5 years. Am I a senior engineer yet?<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2025</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="https://cuffaro-com.disqus.com/embed.js" defer></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-JQGY3PSRXT', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-JQGY3PSRXT" async></script></body>
+</html>
