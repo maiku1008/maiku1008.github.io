@@ -5,6 +5,7 @@ theme = "LoveIt"
 
 # website title
 title = "cuffaro.com"
+buildFuture = true
 
 # language code ["en", "zh-CN", "fr", "pl", ...]
 languageCode = "en"
