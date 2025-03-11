@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Speeding up a Go cli application with concurrency - cuffaro.com</title><meta name="Description" content="cuffaro.com"><meta property="og:url" content="https://cuffaro.com/2023-03-20-go-concurrency/">
+        <title>Speeding up a Go cli application with concurrency - cuffaro.com</title><meta name="Description" content="cuffaro.com"><meta property="og:url" content="http://localhost:1313/2023-03-20-go-concurrency/">
   <meta property="og:site_name" content="cuffaro.com">
   <meta property="og:title" content="Speeding up a Go cli application with concurrency">
   <meta property="og:description" content="Premise A few months ago I worked with a company which provided fully functional backend for online multiplayer games. As part of their product portfolio, they provided their customers with a cli utility, called ds-uploader (dedicated server uploader).
@@ -16,10 +16,10 @@ Process all files and assets in a directory of their choice containing their gam
     <meta property="article:published_time" content="2023-03-20T08:00:47+02:00">
     <meta property="article:modified_time" content="2023-03-20T08:00:47+02:00">
     <meta property="article:tag" content="Go">
-    <meta property="og:image" content="https://cuffaro.com/logo.png">
+    <meta property="og:image" content="http://localhost:1313/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://cuffaro.com/logo.png">
+  <meta name="twitter:image" content="http://localhost:1313/logo.png">
   <meta name="twitter:title" content="Speeding up a Go cli application with concurrency">
   <meta name="twitter:description" content="Premise A few months ago I worked with a company which provided fully functional backend for online multiplayer games. As part of their product portfolio, they provided their customers with a cli utility, called ds-uploader (dedicated server uploader).
 Written in Go, this CLI helped the customer:
@@ -28,7 +28,7 @@ Process all files and assets in a directory of their choice containing their gam
 <meta name="application-name" content="cuffaro.com">
 <meta name="apple-mobile-web-app-title" content="cuffaro.com"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://cuffaro.com/2023-03-20-go-concurrency/" /><link rel="prev" href="https://cuffaro.com/2022-03-20-cks-experience/" /><link rel="next" href="https://cuffaro.com/2023-03-26-am-i-a-senior-engineer-yet/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/2023-03-20-go-concurrency/" /><link rel="prev" href="http://localhost:1313/2022-03-20-cks-experience/" /><link rel="next" href="http://localhost:1313/2023-03-26-am-i-a-senior-engineer-yet/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -38,9 +38,9 @@ Process all files and assets in a directory of their choice containing their gam
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/cuffaro.com\/2023-03-20-go-concurrency\/"
+            "@id": "http:\/\/localhost:1313\/2023-03-20-go-concurrency\/"
         },"genre": "posts","keywords": "go","wordcount":  1245 ,
-        "url": "https:\/\/cuffaro.com\/2023-03-20-go-concurrency\/","datePublished": "2023-03-20T08:00:47+02:00","dateModified": "2023-03-20T08:00:47+02:00","publisher": {
+        "url": "http:\/\/localhost:1313\/2023-03-20-go-concurrency\/","datePublished": "2023-03-20T08:00:47+02:00","dateModified": "2023-03-20T08:00:47+02:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -386,7 +386,7 @@ In particular, the part of the application dealing with the file uploads would t
                             <a class="link-to-markdown" href="/2023-03-20-go-concurrency/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="https://cuffaro.com/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency" data-via="maiku1008" data-hashtags="go"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="https://cuffaro.com/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://cuffaro.com/2023-03-20-go-concurrency/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://cuffaro.com/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="https://cuffaro.com/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency" data-description=""><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=https%3a%2f%2fcuffaro.com%2f2023-03-20-go-concurrency%2f&amp;text=Speeding%20up%20a%20Go%20cli%20application%20with%20concurrency" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency" data-via="maiku1008" data-hashtags="go"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/2023-03-20-go-concurrency/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/2023-03-20-go-concurrency/" data-title="Speeding up a Go cli application with concurrency" data-description=""><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2f2023-03-20-go-concurrency%2f&amp;text=Speeding%20up%20a%20Go%20cli%20application%20with%20concurrency" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -401,9 +401,7 @@ In particular, the part of the application dealing with the file uploads would t
     <div class="post-nav"><a href="/2022-03-20-cks-experience/" class="prev" rel="prev" title="My experience passing Certified Kubernetes Security Specialist (CKS) exam"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>My experience passing Certified Kubernetes Security Specialist (CKS) exam</a>
             <a href="/2023-03-26-am-i-a-senior-engineer-yet/" class="next" rel="next" title="I&#39;ve been programming full time for the past 5 years. Am I a senior engineer yet?">I've been programming full time for the past 5 years. Am I a senior engineer yet?<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
-            </noscript></div></article></div>
+</article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2025</span></div>
         </div>
@@ -417,17 +415,5 @@ In particular, the part of the application dealing with the file uploads would t
         <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="https://cuffaro-com.disqus.com/embed.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/lunr/lunr.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js"></script><script>window.config={"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js"></script><script>
-            var doNotTrack = false;
-            if ( false ) {
-                var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-                var doNotTrack = (dnt == "1" || dnt == "yes");
-            }
-            if (!doNotTrack) {
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-JQGY3PSRXT');
-            }
-        </script><script src="https://www.googletagmanager.com/gtag/js?id=G-JQGY3PSRXT" async></script></body>
+        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/lunr/lunr.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js"></script><script>window.config={"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body>
 </html>

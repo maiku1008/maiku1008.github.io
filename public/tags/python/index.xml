@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Python - Tag - cuffaro.com</title>
-        <link>https://cuffaro.com/tags/python/</link>
+        <link>http://localhost:1313/tags/python/</link>
         <description>Python - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Sep 2019 20:44:43 &#43;0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/python/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Sep 2019 20:44:43 &#43;0200</lastBuildDate><atom:link href="http://localhost:1313/tags/python/" rel="self" type="application/rss+xml" /><item>
     <title>Easy workflow for switching Python virtual environments</title>
-    <link>https://cuffaro.com/2019-09-22-zsh-jump-workon/</link>
+    <link>http://localhost:1313/2019-09-22-zsh-jump-workon/</link>
     <pubDate>Sun, 22 Sep 2019 20:44:43 &#43;0200</pubDate>
     <author>xxxx</author>
-    <guid>https://cuffaro.com/2019-09-22-zsh-jump-workon/</guid>
+    <guid>http://localhost:1313/2019-09-22-zsh-jump-workon/</guid>
     <description><![CDATA[<p>The problem I set out to solve was simply to avoid manually typing pyenv/venv commands
 when moving into directories containing different projects, and around my directory tree.</p>
 <p></p>
@@ -20,10 +20,10 @@ set up with <a href="https://www.zsh.org/" target="_blank" rel="noopener noreffe
 </item>
 <item>
     <title>Making pyenv and neovim play nice (and a few gotchas found along the way)</title>
-    <link>https://cuffaro.com/2018-04-16-pyenv-neovim/</link>
+    <link>http://localhost:1313/2018-04-16-pyenv-neovim/</link>
     <pubDate>Mon, 16 Apr 2018 19:37:10 &#43;0200</pubDate>
     <author>xxxx</author>
-    <guid>https://cuffaro.com/2018-04-16-pyenv-neovim/</guid>
+    <guid>http://localhost:1313/2018-04-16-pyenv-neovim/</guid>
     <description><![CDATA[<p>For my development workflow and IDE, I&rsquo;ve recently decided to move from <a href="https://www.vim.org/" target="_blank" rel="noopener noreffer ">Vim</a>, to <a href="https://neovim.io/" target="_blank" rel="noopener noreffer ">NeoVim</a>, which is essentially Vim on steroids.</p>
 <p>No, but seriously, NeoVim has a <a href="https://neovim.io/charter/" target="_blank" rel="noopener noreffer ">few</a> features that are really interesting, but the real reason for moving is that, as a Python dev, I need to be able to look at source code and definitions very often, while hacking on my code.
 The wonderful <a href="https://github.com/davidhalter/jedi-vim" target="_blank" rel="noopener noreffer ">jedi-vim</a> plugin normally allows me to do just that, when it comes to my local project. But because I am using virtual environments extensively in my work, such as with <a href="https://virtualenv.pypa.io/en/stable/" target="_blank" rel="noopener noreffer ">virtualenv</a> and/or <a href="https://github.com/pyenv/pyenv" target="_blank" rel="noopener noreffer ">pyenv</a>, I have a problem on my hands:</p>]]></description>
