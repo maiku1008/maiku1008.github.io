@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Growth - Tag - cuffaro.com</title>
-        <link>http://localhost:1313/tags/growth/</link>
+        <link>https://cuffaro.com/tags/growth/</link>
         <description>Growth - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 26 Mar 2023 08:00:41 &#43;0200</lastBuildDate><atom:link href="http://localhost:1313/tags/growth/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 26 Mar 2023 08:00:41 &#43;0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/growth/" rel="self" type="application/rss+xml" /><item>
     <title>I&#39;ve been programming full time for the past 5 years. Am I a senior engineer yet?</title>
-    <link>http://localhost:1313/2023-03-26-am-i-a-senior-engineer-yet/</link>
+    <link>https://cuffaro.com/2023-03-26-am-i-a-senior-engineer-yet/</link>
     <pubDate>Sun, 26 Mar 2023 08:00:41 &#43;0200</pubDate>
     <author>xxxx</author>
-    <guid>http://localhost:1313/2023-03-26-am-i-a-senior-engineer-yet/</guid>
+    <guid>https://cuffaro.com/2023-03-26-am-i-a-senior-engineer-yet/</guid>
     <description><![CDATA[<p>When I started my career in software, I&rsquo;ve always wondered when I would finally be a &ldquo;senior&rdquo; engineer.</p>
 <p>Is it a matter of years of experience? Does it just happen suddenly?
 After a few years on the job, I can tell that the answer is not so straightforward.</p>

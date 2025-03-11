@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Proxy - Tag - cuffaro.com</title>
-        <link>http://localhost:1313/tags/proxy/</link>
+        <link>https://cuffaro.com/tags/proxy/</link>
         <description>Proxy - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 09 Mar 2025 10:00:00 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/tags/proxy/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 09 Mar 2025 10:00:00 &#43;0100</lastBuildDate><atom:link href="https://cuffaro.com/tags/proxy/" rel="self" type="application/rss+xml" /><item>
     <title>Squid Proxy Basic Auth Configuration</title>
-    <link>http://localhost:1313/2025-03-09-squid-proxy-basic-auth-configuration/</link>
+    <link>https://cuffaro.com/2025-03-09-squid-proxy-basic-auth-configuration/</link>
     <pubDate>Sun, 09 Mar 2025 10:00:00 &#43;0100</pubDate>
     <author>xxxx</author>
-    <guid>http://localhost:1313/2025-03-09-squid-proxy-basic-auth-configuration/</guid>
+    <guid>https://cuffaro.com/2025-03-09-squid-proxy-basic-auth-configuration/</guid>
     <description><![CDATA[<p>This quick and straightforward how-to is the one I would have loved to have found while I was setting up <a href="https://www.squid-cache.org/" target="_blank" rel="noopener noreffer ">Squid proxy</a> for a production application.</p>
 <p>Squid is a caching proxy for the Web supporting HTTP, HTTPS, FTP, and more. It reduces bandwidth and improves response times by caching and reusing frequently-requested web pages.</p>
 <p>I wanted to restrict access to the proxy to only authenticated users.

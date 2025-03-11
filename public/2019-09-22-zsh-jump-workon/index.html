@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Easy workflow for switching Python virtual environments - cuffaro.com</title><meta name="Description" content="experiences"><meta property="og:url" content="http://localhost:1313/2019-09-22-zsh-jump-workon/">
+        <title>Easy workflow for switching Python virtual environments - cuffaro.com</title><meta name="Description" content="experiences"><meta property="og:url" content="https://cuffaro.com/2019-09-22-zsh-jump-workon/">
   <meta property="og:site_name" content="cuffaro.com">
   <meta property="og:title" content="Easy workflow for switching Python virtual environments">
   <meta property="og:description" content="experiences">
@@ -16,18 +16,18 @@
     <meta property="article:tag" content="Development">
     <meta property="article:tag" content="Python">
     <meta property="article:tag" content="Zsh">
-    <meta property="og:image" content="http://localhost:1313/logo.png">
+    <meta property="og:image" content="https://cuffaro.com/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/logo.png">
+  <meta name="twitter:image" content="https://cuffaro.com/logo.png">
   <meta name="twitter:title" content="Easy workflow for switching Python virtual environments">
   <meta name="twitter:description" content="experiences">
       <meta name="twitter:site" content="@maiku1008">
 <meta name="application-name" content="cuffaro.com">
 <meta name="apple-mobile-web-app-title" content="cuffaro.com"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/2019-09-22-zsh-jump-workon/" /><link rel="prev" href="http://localhost:1313/2019-05-08-go-pitfalls/" /><link rel="next" href="http://localhost:1313/2021-01-24-cka-ckad/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://cuffaro.com/2019-09-22-zsh-jump-workon/" /><link rel="prev" href="https://cuffaro.com/2019-05-08-go-pitfalls/" /><link rel="next" href="https://cuffaro.com/2021-01-24-cka-ckad/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -36,9 +36,9 @@
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http:\/\/localhost:1313\/2019-09-22-zsh-jump-workon\/"
-        },"genre": "posts","keywords": "development, python, zsh","wordcount":  695 ,
-        "url": "http:\/\/localhost:1313\/2019-09-22-zsh-jump-workon\/","datePublished": "2019-09-22T20:44:43+02:00","dateModified": "2019-09-22T20:44:43+02:00","publisher": {
+            "@id": "https:\/\/cuffaro.com\/2019-09-22-zsh-jump-workon\/"
+        },"genre": "posts","keywords": "development, python, zsh","wordcount":  662 ,
+        "url": "https:\/\/cuffaro.com\/2019-09-22-zsh-jump-workon\/","datePublished": "2019-09-22T20:44:43+02:00","dateModified": "2019-09-22T20:44:43+02:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -46,7 +46,7 @@
             },"description": "experiences"
     }
     </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
@@ -108,7 +108,7 @@
     </div><main class="main">
                 <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Easy workflow for switching Python virtual environments</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2019-09-22">2019-09-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;695 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2019-09-22">2019-09-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;662 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="content" id="content"><p>The problem I set out to solve was simply to avoid manually typing pyenv/venv commands
 when moving into directories containing different projects, and around my directory tree.</p>
@@ -131,76 +131,60 @@ This nifty library contains a feature called <a href="https://virtualenvwrapper.
 <p>From the <a href="https://virtualenvwrapper.readthedocs.io/en/latest/install.html" target="_blank" rel="noopener noreffer ">virtualenvwrapper&rsquo;s docs</a>:</p>
 <h3 id="install-with-pip">Install with Pip</h3>
 <p>virtualenvwrapper should be installed into the same global site-packages area where virtualenv is installed. You may need administrative privileges to do that. The easiest way to install it is using pip:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ pip install virtualenvwrapper
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="shell-startup-file">Shell Startup File</h3>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ pip install virtualenvwrapper</span></span></code></pre></div></div>
+<h3 id="shell-startup-file">Shell Startup File</h3>
 <p>Add three lines to your shell startup file (.zshrc, .bashrc, .profile, etc.) to set the location where the virtual environments should live, the location of your development project directories, and the location of the script installed with this package:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">WORKON_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/.virtualenvs
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">WORKON_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/.virtualenvs
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PROJECT_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/Devel
-</span></span><span class="line"><span class="cl"><span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="manage-your-virtualenvs">Manage your virtualenvs</h3>
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh</span></span></code></pre></div></div>
+<h3 id="manage-your-virtualenvs">Manage your virtualenvs</h3>
 <p>Also from the docs, here is a quick list of commands to get started with workon:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">workon
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>A list of environments, empty, is printed.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkvirtualenv temp
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>A new environment, temp is created and activated.
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">workon</span></span></code></pre></div></div>
+<p>A list of environments, empty, is printed.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkvirtualenv temp</span></span></code></pre></div></div>
+<p>A new environment, temp is created and activated.
 It copies the current version of python to make it.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">workon
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This time, the temp environment is included.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">workon temp
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Activates that environment</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deactivate
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Deactivates that same environment</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">workon</span></span></code></pre></div></div>
+<p>This time, the temp environment is included.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">workon temp</span></span></code></pre></div></div>
+<p>Activates that environment</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">deactivate</span></span></code></pre></div></div>
+<p>Deactivates that same environment</p>
 <p>Now that we have an easy way to separate and use our virtual environments, let&rsquo;s talk about Jump!</p>
 <h2 id="jump">Jump</h2>
 <p><a href="https://github.com/gsamokovarov/jump" target="_blank" rel="noopener noreffer ">Jump</a> is a shell integration which uses fuzzy search to help you move around your directory structure more easily.
@@ -217,24 +201,20 @@ Jump allows you to do stuff like this:</p>
         title="gyazothing" /></p>
 <h3 id="installing-jump">Installing Jump:</h3>
 <p>On Mac:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install jump
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>After which, you need to add the following line in your zshrc</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>jump shell<span class="k">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>When you first use Jump it won&rsquo;t do much, as its database is empty; it will learn as you use it.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install jump</span></span></code></pre></div></div>
+<p>After which, you need to add the following line in your zshrc</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>jump shell<span class="k">)</span><span class="s2">&#34;</span></span></span></code></pre></div></div>
+<p>When you first use Jump it won&rsquo;t do much, as its database is empty; it will learn as you use it.</p>
 <p>An alternative to jump, in case you don&rsquo;t want to install Go stuff on your machine (why?), is <a href="https://github.com/rupa/z" target="_blank" rel="noopener noreffer ">z</a>,
 which is entirely written in shell script.</p>
 <h2 id="moving-around-seemlessly-between-projects">Moving around seemlessly between projects</h2>
@@ -242,41 +222,19 @@ which is entirely written in shell script.</p>
 But how do we make the experience even more seamless?</p>
 <p>We can hack our bashrc / zshrc file by adding a snippet of bash, which will run every time we <code>cd</code> into a new directory, checking the presence of a <code>.venv</code> file.</p>
 <p>Said <code>.venv</code> file will simply contain the name of the virtual environment we wish to activate.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;fooenv&#34;</span> &gt;&gt; .venv
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>We then need to modify our zshrc and add this (admittedly hacky) snippet:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Workon</span>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;fooenv&#34;</span> &gt;&gt; .venv</span></span></code></pre></div></div>
+<p>We then need to modify our zshrc and add this (admittedly hacky) snippet:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Workon</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Support for bash</span>
 </span></span><span class="line"><span class="cl"><span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s1">&#39;prompt&#39;</span>
 </span></span><span class="line"><span class="cl">
@@ -296,10 +254,8 @@ But how do we make the experience even more seamless?</p>
 </span></span><span class="line"><span class="cl">                deactivate 2&gt;/dev/null
 </span></span><span class="line"><span class="cl">        <span class="k">fi</span>
 </span></span><span class="line"><span class="cl">    <span class="k">fi</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Alternatively to the above ugly bash hack, we can simply use the <a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/virtualenvwrapper" target="_blank" rel="noopener noreffer ">ZSH Plugin for virtualenvwrapper</a>, which does pretty much the same thing, but better. :)</p>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></div></div>
+<p>Alternatively to the above ugly bash hack, we can simply use the <a href="https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/virtualenvwrapper" target="_blank" rel="noopener noreffer ">ZSH Plugin for virtualenvwrapper</a>, which does pretty much the same thing, but better. :)</p>
 <p>Also with the plugin, Python environments with the same name as the repository will be automatically activated on cd, unless we use the <code>.venv</code> method as described.</p>
 <p>After we source our rc file (or close and reopen our terminal),
 We can jump around like this:</p>
@@ -323,7 +279,7 @@ We can jump around like this:</p>
                             <a class="link-to-markdown" href="/2019-09-22-zsh-jump-workon/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/2019-09-22-zsh-jump-workon/" data-title="Easy workflow for switching Python virtual environments" data-via="maiku1008" data-hashtags="development,python,zsh"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/2019-09-22-zsh-jump-workon/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/2019-09-22-zsh-jump-workon/" data-title="Easy workflow for switching Python virtual environments"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="https://cuffaro.com/2019-09-22-zsh-jump-workon/" data-title="Easy workflow for switching Python virtual environments" data-via="maiku1008" data-hashtags="development,python,zsh"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="https://cuffaro.com/2019-09-22-zsh-jump-workon/" data-title="Easy workflow for switching Python virtual environments"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://cuffaro.com/2019-09-22-zsh-jump-workon/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://cuffaro.com/2019-09-22-zsh-jump-workon/" data-title="Easy workflow for switching Python virtual environments"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="https://cuffaro.com/2019-09-22-zsh-jump-workon/" data-title="Easy workflow for switching Python virtual environments" data-description="experiences"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=https%3a%2f%2fcuffaro.com%2f2019-09-22-zsh-jump-workon%2f&amp;text=Easy%20workflow%20for%20switching%20Python%20virtual%20environments" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -338,7 +294,9 @@ We can jump around like this:</p>
     <div class="post-nav"><a href="/2019-05-08-go-pitfalls/" class="prev" rel="prev" title="Pitfalls I encountered while learning Go"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Pitfalls I encountered while learning Go</a>
             <a href="/2021-01-24-cka-ckad/" class="next" rel="next" title="My experience passing CKA and CKAD">My experience passing CKA and CKAD<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2025</span></div>
         </div>
@@ -346,8 +304,23 @@ We can jump around like this:</p>
 
         <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
                 <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="https://cuffaro-com.disqus.com/embed.js" defer></script><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/lunr/lunr.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js"></script><script>window.config={"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js"></script><script>
+            var doNotTrack = false;
+            if ( false ) {
+                var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+                var doNotTrack = (dnt == "1" || dnt == "yes");
+            }
+            if (!doNotTrack) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-JQGY3PSRXT');
+            }
+        </script><script src="https://www.googletagmanager.com/gtag/js?id=G-JQGY3PSRXT" async></script></body>
 </html>

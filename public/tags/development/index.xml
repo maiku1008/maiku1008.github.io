@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Development - Tag - cuffaro.com</title>
-        <link>http://localhost:1313/tags/development/</link>
+        <link>https://cuffaro.com/tags/development/</link>
         <description>Development - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 26 Mar 2023 08:00:41 &#43;0200</lastBuildDate><atom:link href="http://localhost:1313/tags/development/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 26 Mar 2023 08:00:41 &#43;0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/development/" rel="self" type="application/rss+xml" /><item>
     <title>I&#39;ve been programming full time for the past 5 years. Am I a senior engineer yet?</title>
-    <link>http://localhost:1313/2023-03-26-am-i-a-senior-engineer-yet/</link>
+    <link>https://cuffaro.com/2023-03-26-am-i-a-senior-engineer-yet/</link>
     <pubDate>Sun, 26 Mar 2023 08:00:41 &#43;0200</pubDate>
     <author>xxxx</author>
-    <guid>http://localhost:1313/2023-03-26-am-i-a-senior-engineer-yet/</guid>
+    <guid>https://cuffaro.com/2023-03-26-am-i-a-senior-engineer-yet/</guid>
     <description><![CDATA[<p>When I started my career in software, I&rsquo;ve always wondered when I would finally be a &ldquo;senior&rdquo; engineer.</p>
 <p>Is it a matter of years of experience? Does it just happen suddenly?
 After a few years on the job, I can tell that the answer is not so straightforward.</p>
@@ -21,10 +21,10 @@ After a few years on the job, I can tell that the answer is not so straightforwa
 </item>
 <item>
     <title>Easy workflow for switching Python virtual environments</title>
-    <link>http://localhost:1313/2019-09-22-zsh-jump-workon/</link>
+    <link>https://cuffaro.com/2019-09-22-zsh-jump-workon/</link>
     <pubDate>Sun, 22 Sep 2019 20:44:43 &#43;0200</pubDate>
     <author>xxxx</author>
-    <guid>http://localhost:1313/2019-09-22-zsh-jump-workon/</guid>
+    <guid>https://cuffaro.com/2019-09-22-zsh-jump-workon/</guid>
     <description><![CDATA[<p>The problem I set out to solve was simply to avoid manually typing pyenv/venv commands
 when moving into directories containing different projects, and around my directory tree.</p>
 <p></p>

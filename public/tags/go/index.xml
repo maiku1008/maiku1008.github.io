@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Go - Tag - cuffaro.com</title>
-        <link>http://localhost:1313/tags/go/</link>
+        <link>https://cuffaro.com/tags/go/</link>
         <description>Go - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 20 Mar 2023 08:00:47 &#43;0200</lastBuildDate><atom:link href="http://localhost:1313/tags/go/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 20 Mar 2023 08:00:47 &#43;0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/go/" rel="self" type="application/rss+xml" /><item>
     <title>Speeding up a Go cli application with concurrency</title>
-    <link>http://localhost:1313/2023-03-20-go-concurrency/</link>
+    <link>https://cuffaro.com/2023-03-20-go-concurrency/</link>
     <pubDate>Mon, 20 Mar 2023 08:00:47 &#43;0200</pubDate>
     <author>xxxx</author>
-    <guid>http://localhost:1313/2023-03-20-go-concurrency/</guid>
+    <guid>https://cuffaro.com/2023-03-20-go-concurrency/</guid>
     <description><![CDATA[<h2 id="premise">Premise</h2>
 <p>A few months ago I worked with a company which provided fully functional backend for online multiplayer games.
 As part of their product portfolio, they provided their customers with a cli utility, called <code>ds-uploader</code> (dedicated server uploader).</p>
@@ -23,10 +23,10 @@ As part of their product portfolio, they provided their customers with a cli uti
 </item>
 <item>
     <title>Pitfalls I encountered while learning Go</title>
-    <link>http://localhost:1313/2019-05-08-go-pitfalls/</link>
+    <link>https://cuffaro.com/2019-05-08-go-pitfalls/</link>
     <pubDate>Wed, 08 May 2019 20:56:19 &#43;0200</pubDate>
     <author>xxxx</author>
-    <guid>http://localhost:1313/2019-05-08-go-pitfalls/</guid>
+    <guid>https://cuffaro.com/2019-05-08-go-pitfalls/</guid>
     <description><![CDATA[<p>I started learning Go on and off out of curiosity, late last year.</p>
 <p>Being mainly a Python developer, I figured learning a different programming language would help to broaden my horizons.</p>
 <p>Recently though, we adopted the language for some work projects, therefore I took the plunge and got to really hacking around with it.</p>

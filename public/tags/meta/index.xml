@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Meta - Tag - cuffaro.com</title>
-        <link>http://localhost:1313/tags/meta/</link>
+        <link>https://cuffaro.com/tags/meta/</link>
         <description>Meta - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Feb 2019 19:42:41 &#43;0200</lastBuildDate><atom:link href="http://localhost:1313/tags/meta/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Feb 2019 19:42:41 &#43;0200</lastBuildDate><atom:link href="https://cuffaro.com/tags/meta/" rel="self" type="application/rss+xml" /><item>
     <title>Things I learned during my first year as a Junior Developer</title>
-    <link>http://localhost:1313/2019-02-11-things-i-learned-first-year-dev/</link>
+    <link>https://cuffaro.com/2019-02-11-things-i-learned-first-year-dev/</link>
     <pubDate>Mon, 11 Feb 2019 19:42:41 &#43;0200</pubDate>
     <author>xxxx</author>
-    <guid>http://localhost:1313/2019-02-11-things-i-learned-first-year-dev/</guid>
+    <guid>https://cuffaro.com/2019-02-11-things-i-learned-first-year-dev/</guid>
     <description><![CDATA[<p>It&rsquo;s been an interesting 2018: it was the first year I have coded full-time while getting also paid for it.
 Before that, I worked mainly as internal IT support for a couple different companies, where my coding skills weren&rsquo;t being tested as much as right now.</p>
 <p>I won&rsquo;t lie, the year wasn&rsquo;t always easy. I am surrounded by some brilliant people and I have very often felt some sort of inferiority complex that brought me down many a times; I thought that my experience (or lack thereof) was slowing down the team or not allowing us to achieve the goals we were supposed to achieve.</p>]]></description>
