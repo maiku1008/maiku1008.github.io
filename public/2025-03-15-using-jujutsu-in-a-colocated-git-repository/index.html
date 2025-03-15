@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Using Jujutsu in a colocated git repository - cuffaro.com</title><meta name="Description" content="git"><meta property="og:url" content="http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/">
+  <meta property="og:site_name" content="cuffaro.com">
+  <meta property="og:title" content="Using Jujutsu in a colocated git repository">
+  <meta property="og:description" content="git">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-15T08:00:00+01:00">
+    <meta property="article:modified_time" content="2025-03-15T08:00:00+01:00">
+    <meta property="article:tag" content="Git">
+    <meta property="article:tag" content="Jujutsu">
+    <meta property="article:tag" content="Colocated">
+    <meta property="article:tag" content="Remote">
+    <meta property="article:tag" content="Repository">
+    <meta property="og:image" content="http://localhost:1313/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/logo.png">
+  <meta name="twitter:title" content="Using Jujutsu in a colocated git repository">
+  <meta name="twitter:description" content="git">
+      <meta name="twitter:site" content="@maiku1008">
+<meta name="application-name" content="cuffaro.com">
+<meta name="apple-mobile-web-app-title" content="cuffaro.com"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/" /><link rel="prev" href="http://localhost:1313/2025-03-09-squid-proxy-basic-auth-configuration/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Using Jujutsu in a colocated git repository",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/2025-03-15-using-jujutsu-in-a-colocated-git-repository\/"
+        },"genre": "posts","keywords": "git, jujutsu, colocated, remote, repository","wordcount":  1052 ,
+        "url": "http:\/\/localhost:1313\/2025-03-15-using-jujutsu-in-a-colocated-git-repository\/","datePublished": "2025-03-15T08:00:00+01:00","dateModified": "2025-03-15T08:00:00+01:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": "git"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cuffaro.com">cuffaro.com</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cuffaro.com">cuffaro.com</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Using Jujutsu in a colocated git repository</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-15">2025-03-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1052 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="content" id="content"><p><a href="https://github.com/jj-vcs/jj" target="_blank" rel="noopener noreffer ">Jujutsu</a> (<code>jj</code>) is a Git-compatible version control system that offers a different approach to managing your code history.
+I have spent the last few weeks using Jujutsu (or <code>jj</code>) daily on personal and work git repositories.
+One of its advantages is that you can use it locally alongside your team without them being aware that you&rsquo;re managing your code history differently.</p>
+<p>Really, Jujutsu is a frontend for git, using git as its backend.
+Your work is still based on a commit history, but the way you evolve your commits is different.</p>
+<p>In this post, we&rsquo;ll explore how to use Jujutsu alongside an existing Git repository.</p>
+<h2 id="setting-up-jujutsu-with-an-existing-git-repository">Setting Up Jujutsu with an Existing Git Repository</h2>
+<h3 id="cloning-the-repository">Cloning the repository</h3>
+<p>We will be working with an existing repository.
+I&rsquo;ll be using <a href="https://github.com/maiku1008/jj-demo" target="_blank" rel="noopener noreffer ">https://github.com/maiku1008/jj-demo</a> as an example. Feel free to fork it or create a new repository.</p>
+<p>Let&rsquo;s start with cloning it:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone git@github.com:maiku1008/jj-demo.git</span></span></code></pre></div></div>
+<p>This is how the directory tree looks:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> jj-demo/
+</span></span><span class="line"><span class="cl">$ tree
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── Cargo.toml
+</span></span><span class="line"><span class="cl">├── README.md
+</span></span><span class="line"><span class="cl">└── src
+</span></span><span class="line"><span class="cl">    └── main.rs</span></span></code></pre></div></div>
+<h3 id="initializing-jujutsu">Initializing Jujutsu</h3>
+<p>Use the following command to initialize Jujutsu in the git repository:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj git init --colocate
+</span></span><span class="line"><span class="cl">Done importing changes from the underlying Git repo.
+</span></span><span class="line"><span class="cl">Setting the revset <span class="nb">alias</span> <span class="s2">&#34;trunk()&#34;</span> to <span class="s2">&#34;main@origin&#34;</span>
+</span></span><span class="line"><span class="cl">Hint: The following remote bookmarks aren<span class="err">&#39;</span>t associated with the existing <span class="nb">local</span> bookmarks:
+</span></span><span class="line"><span class="cl">  main@origin
+</span></span><span class="line"><span class="cl">Hint: Run <span class="sb">`</span>jj bookmark track main@origin<span class="sb">`</span> to keep <span class="nb">local</span> bookmarks updated on future pulls.
+</span></span><span class="line"><span class="cl">Initialized repo in <span class="s2">&#34;.&#34;</span></span></span></code></pre></div></div>
+<p>This creates a <code>.jj/</code> directory at the root of the project, which is ignored by git by default.
+As mentioned before, Jujutsu uses <code>git</code> as a backend.
+We can now inspect the repository:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj status
+</span></span><span class="line"><span class="cl">The working copy is clean
+</span></span><span class="line"><span class="cl">Working copy : ppmklykz a0c618e4 <span class="o">(</span>empty<span class="o">)</span> <span class="o">(</span>no description <span class="nb">set</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">Parent commit: qwppmxos bdc4d64c main main@origin <span class="p">|</span> initial commit</span></span></code></pre></div></div>
+<p>This shows us the working copy commit (where our changes will go) and its parent commit. Unlike Git, Jujutsu always has a working copy commit.
+Every time a change is made, the equivalent of a <code>git commit --amend</code> is made to save that change.</p>
+<p>If you&rsquo;re following along with this how-to, note that the ID hashes shown here will be different from the ones you will have locally.</p>
+<h2 id="basic-jujutsu-workflows">Basic Jujutsu Workflows</h2>
+<h3 id="creating-and-managing-commits">Creating and Managing Commits</h3>
+<p>Let&rsquo;s make some changes to our code and see how Jujutsu handles them:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">&#34;// Add a comment&#34;</span> &gt;&gt; src/main.rs
+</span></span><span class="line"><span class="cl">$ jj status
+</span></span><span class="line"><span class="cl">Working copy changes:
+</span></span><span class="line"><span class="cl">M src/main.rs
+</span></span><span class="line"><span class="cl">Working copy : ppmklykz ab604fa8 <span class="o">(</span>no description <span class="nb">set</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">Parent commit: qwppmxos bdc4d64c main main@origin <span class="p">|</span> initial commit</span></span></code></pre></div></div>
+<p>Our working copy (with the change ID <code>ppmklykz</code>) has some changes but has no description.
+Let&rsquo;s fix that:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj describe -m <span class="s2">&#34;add a comment to main.rs&#34;</span>
+</span></span><span class="line"><span class="cl">Working copy now at: ppmklykz 6a839da5 add a comment to main.rs
+</span></span><span class="line"><span class="cl">Parent commit      : qwppmxos bdc4d64c main main@origin <span class="p">|</span> initial commit</span></span></code></pre></div></div>
+<p>Note how the change ID <code>ppmklykz</code> of our working copy stayed the same, but the actual commit ID has changed.
+Now let&rsquo;s create a new commit:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj new
+</span></span><span class="line"><span class="cl">Working copy now at: vvrwrmys a8b00dce <span class="o">(</span>empty<span class="o">)</span> <span class="o">(</span>no description <span class="nb">set</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">Parent commit      : ppmklykz 6a839da5 add a comment to main.rs</span></span></code></pre></div></div>
+<p>Jujutsu creates a new change ID and commit ID, and automatically moves our working copy forward. Let&rsquo;s make another change:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">&#34;// Add another comment&#34;</span> &gt;&gt; src/main.rs
+</span></span><span class="line"><span class="cl">$ jj describe -m <span class="s2">&#34;add another comment&#34;</span>
+</span></span><span class="line"><span class="cl">Working copy now at: vvrwrmys afce1a3d add another comment
+</span></span><span class="line"><span class="cl">Parent commit      : ppmklykz 6a839da5 add a comment to main.rs</span></span></code></pre></div></div>
+<p>Let&rsquo;s squash the changes:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj squash</span></span></code></pre></div></div>
+<p>This will open our default editor to allow us to edit our desired commit message:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">JJ: Enter a description for the combined commit.
+</span></span><span class="line"><span class="cl">JJ: Description from the destination commit:
+</span></span><span class="line"><span class="cl">add a comment to main.rs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">JJ: Description from source commit:
+</span></span><span class="line"><span class="cl">add another comment
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">JJ: Lines starting with &#34;JJ:&#34; (like this one) will be removed.</span></span></code></pre></div></div>
+<p>Let&rsquo;s change the commit message to &ldquo;add comments to main.rs&rdquo;</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">JJ: Enter a description for the combined commit.
+</span></span><span class="line"><span class="cl">JJ: Description from the destination commit:
+</span></span><span class="line"><span class="cl">add comments to main.rs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">JJ: Description from source commit:
+</span></span><span class="line"><span class="cl">JJ: Lines starting with &#34;JJ:&#34; (like this one) will be removed.</span></span></code></pre></div></div>
+<p>Once we exit the editor, we will be presented with the new state:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Working copy now at: ozummmpz d45e738b <span class="o">(</span>empty<span class="o">)</span> <span class="o">(</span>no description <span class="nb">set</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">Parent commit      : ppmklykz e8ee5ac1 add comments to main.rs</span></span></code></pre></div></div>
+<p>This combines the changes from both commits into a single commit.</p>
+<h3 id="working-with-branches-and-bookmarks">Working with Branches and Bookmarks</h3>
+<p>In Jujutsu, <a href="https://github.com/jj-vcs/jj/blob/main/docs/bookmarks.md" target="_blank" rel="noopener noreffer ">bookmarks</a> map to actual branches in Git:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj bookmark create feature-x
+</span></span><span class="line"><span class="cl">Created <span class="m">1</span> bookmarks pointing to ozummmpz d45e738b feature-x <span class="p">|</span> <span class="o">(</span>empty<span class="o">)</span> <span class="o">(</span>no description <span class="nb">set</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">$ jj status
+</span></span><span class="line"><span class="cl">The working copy is clean
+</span></span><span class="line"><span class="cl">Working copy : ozummmpz d45e738b feature-x <span class="p">|</span> <span class="o">(</span>empty<span class="o">)</span> <span class="o">(</span>no description <span class="nb">set</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">Parent commit: ppmklykz e8ee5ac1 add comments to main.rs</span></span></code></pre></div></div>
+<p>By default the new bookmark is pointing to our working copy</p>
+<p>Let&rsquo;s set our current working copy to our <code>ppmklykz</code> change.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj edit ppmklykz
+</span></span><span class="line"><span class="cl">Working copy now at: ppmklykz e8ee5ac1 add comments to main.rs
+</span></span><span class="line"><span class="cl">Parent commit      : qwppmxos bdc4d64c main main@origin <span class="p">|</span> initial commit</span></span></code></pre></div></div>
+<p>Let&rsquo;s create a new bookmark</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj bookmark create add-comments
+</span></span><span class="line"><span class="cl">Created <span class="m">1</span> bookmarks pointing to ppmklykz e8ee5ac1 add-comments <span class="p">|</span> add comments to main.rs</span></span></code></pre></div></div>
+<p>To see all bookmarks:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj branch list
+</span></span><span class="line"><span class="cl">feature-x: ozummmpz d45e738b <span class="o">(</span>empty<span class="o">)</span> <span class="o">(</span>no description <span class="nb">set</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">add-comments: ppmklykz e8ee5ac1 add comments to main.rs
+</span></span><span class="line"><span class="cl">main: qwppmxos bdc4d64c initial commit</span></span></code></pre></div></div>
+<h2 id="synchronizing-with-remote-repositories">Synchronizing with Remote Repositories</h2>
+<h3 id="pushing-changes">Pushing Changes</h3>
+<p>To push your changes in the current working copy to the remote Git repository:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj git push --allow-new
+</span></span><span class="line"><span class="cl">Changes to push to origin:
+</span></span><span class="line"><span class="cl">  Add bookmark add-comments to e8ee5ac1c954</span></span></code></pre></div></div>
+<p>Jujutsu automatically maps your bookmarks to Git branches when pushing.</p>
+<p>To push a specific bookmark:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj git push --bookmark feature-y</span></span></code></pre></div></div>
+<h3 id="fetching-and-tracking-remote-changes">Fetching and Tracking Remote Changes</h3>
+<p>To fetch changes from the remote repository:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj git fetch
+</span></span><span class="line"><span class="cl">Fetching from origin <span class="o">(</span>git@github.com:maiku1008/jj-demo.git<span class="o">)</span></span></span></code></pre></div></div>
+<p>To track a remote branch:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj bookmark track main@origin
+</span></span><span class="line"><span class="cl">Started tracking <span class="m">1</span> remote bookmarks.</span></span></code></pre></div></div>
+<p>To update your local repository with remote changes:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj rebase -d main
+</span></span><span class="line"><span class="cl">Rebased <span class="m">1</span> commits onto destination</span></span></code></pre></div></div>
+<p>To see what changes came in from the remote:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-chevron-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ jj log -r <span class="s2">&#34;remote_branches(origin)&#34;</span></span></span></code></pre></div></div>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>Hopefully this short guide provides a clear introduction to using Jujutsu in an existing repository without disrupting your teammates&rsquo; workflow.</p>
+<p>I believe this is the most common use case for most developers, yet as of March 2025, straightforward documentation on this specific scenario remains surprisingly scarce.
+I hope you&rsquo;ve found this helpful for your own version control journey with Jujutsu!.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-03-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2025-03-15-using-jujutsu-in-a-colocated-git-repository/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/" data-title="Using Jujutsu in a colocated git repository" data-via="maiku1008" data-hashtags="git,jujutsu,colocated,remote,repository"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/" data-title="Using Jujutsu in a colocated git repository"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/" data-title="Using Jujutsu in a colocated git repository"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/" data-title="Using Jujutsu in a colocated git repository" data-description="git"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2f2025-03-15-using-jujutsu-in-a-colocated-git-repository%2f&amp;text=Using%20Jujutsu%20in%20a%20colocated%20git%20repository" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/git/">Git</a>,&nbsp;<a href="/tags/jujutsu/">Jujutsu</a>,&nbsp;<a href="/tags/colocated/">Colocated</a>,&nbsp;<a href="/tags/remote/">Remote</a>,&nbsp;<a href="/tags/repository/">Repository</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2025-03-09-squid-proxy-basic-auth-configuration/" class="prev" rel="prev" title="Squid Proxy Basic Auth Configuration"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Squid Proxy Basic Auth Configuration</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2018 - 2025</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/lunr/lunr.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js"></script><script>window.config={"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -3,17 +3,17 @@
         <title>Repository - Tag - cuffaro.com</title>
         <link>http://localhost:1313/tags/repository/</link>
         <description>Repository - Tag - cuffaro.com</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 14 Feb 2025 08:00:00 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/tags/repository/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 15 Mar 2025 08:00:00 &#43;0100</lastBuildDate><atom:link href="http://localhost:1313/tags/repository/" rel="self" type="application/rss+xml" /><item>
     <title>Using Jujutsu in a colocated git repository</title>
-    <link>http://localhost:1313/2025-02-14-using-jujutsu/</link>
-    <pubDate>Fri, 14 Feb 2025 08:00:00 &#43;0100</pubDate>
+    <link>http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/</link>
+    <pubDate>Sat, 15 Mar 2025 08:00:00 &#43;0100</pubDate>
     <author>xxxx</author>
-    <guid>http://localhost:1313/2025-02-14-using-jujutsu/</guid>
-    <description><![CDATA[<p>Jujutsu (jj) is a Git-compatible version control system that offers a different approach to managing your code history.
-I have spent a few weeks using Jujutsu (or <code>jj</code>) daily on personal and work git repositories.
-One of the advantages of Jujutsu is that you can use it locally alongside your team without them being aware that you&rsquo;re managing your code history differently.</p>
-<p>Really Jujutsu is a frontend for git, using git as its backend.
-So we are still based on a commit history, but the way we evolve our commit is different.</p>]]></description>
+    <guid>http://localhost:1313/2025-03-15-using-jujutsu-in-a-colocated-git-repository/</guid>
+    <description><![CDATA[<p><a href="https://github.com/jj-vcs/jj" target="_blank" rel="noopener noreffer ">Jujutsu</a> (<code>jj</code>) is a Git-compatible version control system that offers a different approach to managing your code history.
+I have spent the last few weeks using Jujutsu (or <code>jj</code>) daily on personal and work git repositories.
+One of its advantages is that you can use it locally alongside your team without them being aware that you&rsquo;re managing your code history differently.</p>
+<p>Really, Jujutsu is a frontend for git, using git as its backend.
+Your work is still based on a commit history, but the way you evolve your commits is different.</p>]]></description>
 </item>
 </channel>
 </rss>

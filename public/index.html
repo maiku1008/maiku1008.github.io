@@ -103,6 +103,15 @@
         alt="https://www.gravatar.com/avatar/c57de263ded85a3a139d9b7c24a302dd?s=240&amp;d=mp"
         title="https://www.gravatar.com/avatar/c57de263ded85a3a139d9b7c24a302dd?s=240&amp;d=mp" /></a></div><h1 class="home-title">cuffaro.com</h1><div class="home-subtitle">Michael Cuffaro's personal blog</div><div class="links"><a href="https://github.com/maiku1008" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/micuffaro" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://x.com/maiku1008" title="X" target="_blank" rel="noopener noreffer me"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="mailto:m@cuffaro.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/2025-03-15-using-jujutsu-in-a-colocated-git-repository/">Using Jujutsu in a colocated git repository</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-03-15">2025-03-15</time></span></div><div class="content"><p><a href="https://github.com/jj-vcs/jj" target="_blank" rel="noopener noreffer ">Jujutsu</a> (<code>jj</code>) is a Git-compatible version control system that offers a different approach to managing your code history.
+I have spent the last few weeks using Jujutsu (or <code>jj</code>) daily on personal and work git repositories.
+One of its advantages is that you can use it locally alongside your team without them being aware that you&rsquo;re managing your code history differently.</p>
+<p>Really, Jujutsu is a frontend for git, using git as its backend.
+Your work is still based on a commit history, but the way you evolve your commits is different.</p></div><div class="post-footer">
+        <a href="/2025-03-15-using-jujutsu-in-a-colocated-git-repository/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/git/">Git</a>,&nbsp;<a href="/tags/jujutsu/">Jujutsu</a>,&nbsp;<a href="/tags/colocated/">Colocated</a>,&nbsp;<a href="/tags/remote/">Remote</a>,&nbsp;<a href="/tags/repository/">Repository</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/2025-03-09-squid-proxy-basic-auth-configuration/">Squid Proxy Basic Auth Configuration</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-03-09">2025-03-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/system-administration/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>System Administration</a></span></div><div class="content"><p>This quick and straightforward how-to is the one I would have loved to have found while I was setting up <a href="https://www.squid-cache.org/" target="_blank" rel="noopener noreffer ">Squid proxy</a> for a production application.</p>
 <p>Squid is a caching proxy for the Web supporting HTTP, HTTPS, FTP, and more. It reduces bandwidth and improves response times by caching and reusing frequently-requested web pages.</p>
@@ -167,25 +176,6 @@ As part of their product portfolio, they provided their customers with a cli uti
 <p>The exam for any of these Kubernetes certifications consists in solving a set of tasks, in a 2 hour terminal session.</p></div><div class="post-footer">
         <a href="/2021-01-24-cka-ckad/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/experience/">Experience</a>,&nbsp;<a href="/tags/devops/">Devops</a>,&nbsp;<a href="/tags/cloud/">Cloud</a>,&nbsp;<a href="/tags/kubernetes/">Kubernetes</a>,&nbsp;<a href="/tags/cncf/">Cncf</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/2019-09-22-zsh-jump-workon/">Easy workflow for switching Python virtual environments</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span>&nbsp;<span class="post-publish">published on <time datetime="2019-09-22">2019-09-22</time></span></div><div class="content"><p>The problem I set out to solve was simply to avoid manually typing pyenv/venv commands
-when moving into directories containing different projects, and around my directory tree.</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i.gyazo.com/6ad3c719def2828f1f1f2dffc654c90a.gif"
-        data-srcset="https://i.gyazo.com/6ad3c719def2828f1f1f2dffc654c90a.gif, https://i.gyazo.com/6ad3c719def2828f1f1f2dffc654c90a.gif 1.5x, https://i.gyazo.com/6ad3c719def2828f1f1f2dffc654c90a.gif 2x"
-        data-sizes="auto"
-        alt="https://i.gyazo.com/6ad3c719def2828f1f1f2dffc654c90a.gif"
-        title="theproblem" /></p>
-<p>If you are like me, you would be working on different things at different times, and
-switching projects around seamlessly becomes a requirement to avoid waste of time, attention and context.</p>
-<h3 id="my-environment">My environment</h3>
-<p>For the sake of clarity, I am using a Macbook Pro with macOS Mojave, and I have iTerm2
-set up with <a href="https://www.zsh.org/" target="_blank" rel="noopener noreffer ">ZSH</a> and <a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener noreffer ">oh-my-zsh</a> as my shell.</p></div><div class="post-footer">
-        <a href="/2019-09-22-zsh-jump-workon/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/development/">Development</a>,&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/zsh/">Zsh</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
