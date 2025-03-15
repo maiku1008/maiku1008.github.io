@@ -222,4 +222,4 @@ $ jj log -r "remote_branches(origin)"
 Hopefully this short guide provides a clear introduction to using Jujutsu in an existing repository without disrupting your teammates' workflow.
 
 I believe this is the most common use case for most developers, yet as of March 2025, straightforward documentation on this specific scenario remains surprisingly scarce.
-I hope you've found this helpful for your own version control journey with Jujutsu!.
+I hope you've found this helpful for your own version control journey with Jujutsu!
